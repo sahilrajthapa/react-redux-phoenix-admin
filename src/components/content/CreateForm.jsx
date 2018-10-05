@@ -16,11 +16,11 @@ class CreateForm extends Component {
     })
   }
   addToQuestions = (addedQuestions) => {
-     this.setState({
-        ...this.state,
-        displayQuestions: false,
-        introQuestions: [...this.state.introQuestions, addedQuestions ]
-     })
+    this.setState({
+      ...this.state,
+      displayQuestions: false,
+      introQuestions: [...this.state.introQuestions, addedQuestions]
+    })
   }
 
   render() {
@@ -29,52 +29,25 @@ class CreateForm extends Component {
     let QuestionList;
 
     if (displayQuestions) {
-      formQuestions = <Questions onSubmit={this.addToQuestions}/>
+      formQuestions = <Questions onSubmit={this.addToQuestions} />
     }
     if (introQuestions.length > 0) {
-       QuestionList = introQuestions.map((question) => {
-
-          let options =  question.options.map(option => {
-            console.log(option)
-            return (
-               <li>{option.optionsLabel}</li>
-            )
-          })
+      QuestionList = introQuestions.map((question) => {
+        let options = question.options.map(option => {
+          console.log(option)
           return (
-            <div className="box">
-            <div className="box-header">
-              <h3 className="box-title">User Personal Questions</h3>
-
-              <div className="box-tools">
-                <div className="input-group input-group-sm" style={{ width: "150px"}}>
-                  <input type="text" name="table_search" className="form-control pull-right" placeholder="Search" />
-
-                  <div className="input-group-btn">
-                    <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="box-body table-responsive no-padding">
-              <table className="table table-hover">
-                <tbody><tr>               
-                  <th>Name</th>
-                  <th>Label</th>
-                  <th>Form Type</th>
-                  <th>Options</th>
-                </tr>
-                <tr>
-                  <td>{question.name}</td>
-                  <td>{question.label}</td>              
-                  <td>{question.formType}</td>
-                  <td><ul>{options}</ul></td>
-                </tr>
-              </tbody></table>
-            </div>
-          </div>
-
+            <li>{option.optionsLabel}</li>
           )
-       })
+        })
+        return (
+          <tr>
+            <td>{question.name}</td>
+            <td>{question.label}</td>
+            <td>{question.formType}</td>
+            <td><ul>{options}</ul></td>
+          </tr>
+        )
+      })
     }
     return (
       <div className="content-wrapper">
@@ -107,7 +80,36 @@ class CreateForm extends Component {
                   <label htmlFor="dueDate">DueDate</label>
                   <input type="date" className="form-control" name="dueDate" value={this.state.dueDate} onChange={this.onChange} />
                 </div>
-               { QuestionList}
+                {QuestionList && (
+                  <div className="box" style={{ maxHeight: '350px', overflow: 'scroll'}}>
+                    <div className="box-header">
+                      <h3 className="box-title">User Personal Questions</h3>
+
+                      <div className="box-tools">
+                        <div className="input-group input-group-sm" style={{ width: "150px" }}>
+                          <input type="text" name="table_search" className="form-control pull-right" placeholder="Search" />
+
+                          <div className="input-group-btn">
+                            <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="box-body table-responsive no-padding">
+                      <table className="table table-hover">
+                        <tbody><tr>
+                          <th>Name</th>
+                          <th>Label</th>
+                          <th>Form Type</th>
+                          <th>Options</th>
+                        </tr>
+
+                          {QuestionList}
+
+                        </tbody></table>
+                    </div>
+                  </div>
+                )}
                 {formQuestions}
                 <button type="button" onClick={() => {
                   this.setState(prevState => ({
