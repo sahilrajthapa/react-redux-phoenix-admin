@@ -2,6 +2,19 @@ import React, {Component} from 'react';
 
 class Content extends Component {
     render(){
+        const options = [
+            { label: "* Select Form Type", value: "* Select Form Type" },
+            { label: "text", value: "text" },
+            { label: "number", value: "number" },
+            { label: "checkbox", value: "checkbox" },
+            { label: "radio", value: "radio" }
+        ];
+
+        const selectOptions = options.map(option => (
+            <option key={option.label} value={option.value}>
+                {option.value}
+            </option>
+        ));
         return (
             <div className="content-wrapper">
                 <section className="content-header">

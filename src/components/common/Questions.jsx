@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Options from './Options';
+import TextFieldGroup from './TextFieldGroup'
 
 class Questions extends Component {
     state = {
-        label: '',
-        name: '',
+        question: '',
+        qname: '',
         formType: '',
         options: [],
         showOptions: false
@@ -18,18 +19,18 @@ class Questions extends Component {
 
     onFormTypeChange = (e) => {
         console.log(e.target.value)
-        if(e.target.value === 'checkbox' || e.target.value === 'radio') {
+        if (e.target.value === 'checkbox' || e.target.value === 'radio') {
             this.setState({
                 [e.target.name]: e.target.value,
                 showOptions: true
             })
-        } else  {
+        } else {
             this.setState({
                 [e.target.name]: e.target.value,
                 showOptions: false
             })
         }
-        
+
     }
     onSubmit = (e) => {
         e.preventDefault();
@@ -38,17 +39,17 @@ class Questions extends Component {
         }
         this.props.onSubmit(addQuestions)
     }
-  
+
     addOptions = (addedOptions) => {
         this.setState({
-           ...this.state,
-          
-           options: [...this.state.options, addedOptions ]
+            ...this.state,
+            showOptions: false,
+            options: [...this.state.options, addedOptions]
         })
-     }
+    }
 
     render() {
-        let { showOptions, label, name, formType } = this.state
+        let { showOptions, question, qname, formType } = this.state
 
         const options = [
             { label: "* Select Form Type", value: "* Select Form Type" },
@@ -63,37 +64,52 @@ class Questions extends Component {
                 {option.value}
             </option>
         ));
-       
-        
-        return (        
-            <div>
-                <div className="form-group">
-                    <label htmlFor="label">Label</label>
-                    <input type="text" className="form-control" name="label" value={label} onChange={this.onChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} />
-                </div>
 
-                <div className="form-group">
-                    <label htmlFor="formType">Form Type</label>
-                    <select
-                        name="formType"
-                        value={formType}
-                        onChange={this.onFormTypeChange}
-                    >
-                        {selectOptions}
-                    </select>
-                </div>
-                {showOptions && <Options addOptions={this.addOptions}/> }
 
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
+        return (
+            <div className="box box-primary">
+                <div className="box-header with-border">
+                    <h3 className="box-title">Quick Example</h3>
                 </div>
+                <form >
+                    <div className="box-body">
+                        <TextFieldGroup
+                            label="Question Name"
+                            name="qname"
+                            placeholder="Enter name for question"
+                            value={qname}
+                            onChange={this.onChange}
+                        />
+
+                        <TextFieldGroup
+                            label="Question"
+                            name="question"
+                            placeholder="Enter actual question"
+                            value={question}
+                            onChange={this.onChange}
+                        />
+                        <div className="form-group">
+                            <label htmlFor="formType">Form Type</label>
+                            <select
+                                className="form-control"
+                                name="formType"
+                                value={formType}
+                                onChange={this.onFormTypeChange}
+                                onSelect={this.onFormTypeChange}
+                            >
+                                {selectOptions}
+                            </select>
+                        </div>
+                        {showOptions && <Options addOptions={this.addOptions} />}
+                    </div>
+                    <div className="box-footer">
+                        <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
+                    </div>
+                </form>
             </div>
         )
     }
 }
+
 
 export default Questions;
