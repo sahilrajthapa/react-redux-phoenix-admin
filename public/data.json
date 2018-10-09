@@ -1,0 +1,783 @@
+[
+    {
+        "type": "hypertension-detailed",
+        "dueDate": "2018-09-29",
+        "introQuestions": [
+            {
+                "label": "Name",
+                "name": "name",
+                "formType": "text"
+            },
+            {
+                "label": "Phone",
+                "name": "phone",
+                "formType": "text"
+            },
+            {
+                "label": "Height(cm)",
+                "name": "height",
+                "formType": "text"
+            },
+            {
+                "label": "Weight(kg)",
+                "name": "weight",
+                "formType": "text"
+            },
+            {
+                "label": "Date of Birth",
+                "name": "dob",
+                "formType": "text"
+            },
+            {
+                "label": "Gender",
+                "name": "gender",
+                "formType": "radio",
+                "options": [
+                    {
+                        "label": "male",
+                        "value": "1"
+                    },
+                    {
+                        "label": "female",
+                        "value": "0"
+                    }
+                ]
+            },
+            {
+                "label": "Career",
+                "name": "carrer",
+                "formType": "radio",
+                "options": [
+                    {
+                        "label": "Cadre",
+                        "value": "cadre"
+                    },
+                    {
+                        "label": "Professional skill worker",
+                        "value": "professional"
+                    },
+                    {
+                        "label": "Staff and related personnel",
+                        "value": "staff"
+                    },
+                    {
+                        "label": "Other",
+                        "value": "other"
+                    }
+                ]
+            },
+            {
+                "label": "Nationality",
+                "name": "nationality",
+                "formType": "radio",
+                "options": [
+                    {
+                        "label": "Chinese",
+                        "value": "chinese"
+                    },
+                    {
+                        "label": "Mongolian",
+                        "value": "mongolian"
+                    },
+                    {
+                        "label": "Other",
+                        "value": "other"
+                    }
+                ]
+            },
+            {
+                "label": "Education Level",
+                "name": "education",
+                "formType": "radio",
+                "options": [
+                    {
+                        "label": "High School",
+                        "value": "high school"
+                    },
+                    {
+                        "label": "Univerisity",
+                        "value": "university"
+                    },
+                    {
+                        "label": "Master's Degree",
+                        "value": "masters degree"
+                    },
+                    {
+                        "label": "Doctor",
+                        "value": "doctor"
+                    },
+                    {
+                        "label": "Other",
+                        "value": "other"
+                    }
+                ]
+            },
+            {
+                "label": "The last time you measured your blood pressure was",
+                "name": "blood-pressure",
+                "formType": "text",
+                "options": [
+                    {
+                        "name": "systolic",
+                        "formType": "text"
+                    },
+                    {
+                        "label": "/",
+                        "name": "diastolic",
+                        "formType": "text"
+                    }
+                ]
+            }
+        ],
+        "coreQuestions": [
+            {
+                "label": "Do you know your blood pressure level?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "When was the last time you measured your blood pressure?",
+                "options": [
+                    {
+                        "label": "In the last 3 months"
+                    },
+                    {
+                        "label": "3-6 months ago"
+                    },
+                    {
+                        "label": "6 months to 1 year ago"
+                    },
+                    {
+                        "label": "More than 1 year ago"
+                    },
+                    {
+                        "label": "I do not remember"
+                    },
+                    {
+                        "label": "I have never measured blood pressure"
+                    }
+                ]
+            },
+            {
+                "label": "Inattention is not concentrated?",
+                "options": [
+                    {
+                        "label": "1 year"
+                    },
+                    {
+                        "label": "2-3 years"
+                    },
+                    {
+                        "label": "3-5 years"
+                    },
+                    {
+                        "label": "More than 5 years"
+                    },
+                    {
+                        "label": "No"
+                    },
+                    {
+                        "label": "do not know"
+                    }
+                ]
+            },
+            {
+                "label": "Are you taking high blood pressure medications?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Are there symptoms when blood pressure is high?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Which of the following do you think are the risk factors for high blood pressure? (multiple choice)",
+                "formType": "multi-select",
+                "options": [
+                    {
+                        "label": "Family history of hypertension",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Overweight/obesity",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Infrequent exercise",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "diabetes",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "age",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "High Salt diet",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Race",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "High Fat diet",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Excessive drinking",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Sexual activity",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Smoking",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Other",
+                        "formType": "textbox"
+                    }
+                ]
+            },
+            {
+                "label": "Does any of your immediate family members (grandparents, parents, aunts/uncles (舅), brothers and sisters) have high blood pressure?",
+                "options": [
+                    {
+                        "label": "Have"
+                    },
+                    {
+                        "label": "I donot know"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "What is the diagnostic criteria for hypertension (mm/Hg)?",
+                "options": [
+                    {
+                        "label": "120/80"
+                    },
+                    {
+                        "label": "130/85"
+                    },
+                    {
+                        "label": "140/90"
+                    },
+                    {
+                        "label": "160/95"
+                    }
+                ]
+            },
+            {
+                "label": "Which organs are harmful to high blood pressure? (multiple choice)",
+                "formType": "multi-select",
+                "options": [
+                    {
+                        "label": "Heart",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Brain",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Kidney",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Eye",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Artery",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "do not know",
+                        "formType": "checkbox"
+                    }
+                ]
+            },
+            {
+                "label": "What is the main source of your knowledge of hypertension? (multiple choice)",
+                "formType": "multi-select",
+                "options": [
+                    {
+                        "label": "broadcast and TV station",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Health book",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Family and friends",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "Medical staff",
+                        "formType": "checkbox"
+                    },
+                    {
+                        "label": "The internet",
+                        "formType": "checkbox"
+                    }
+                ]
+            },
+            {
+                "label": "What is the salt label in your diet? (multiple choice)",
+                "options": [
+                    {
+                        "label": "Heavy taste, more salt"
+                    },
+                    {
+                        "label": "Medium taste"
+                    },
+                    {
+                        "label": "Light taste, less salt"
+                    }
+                ]
+            },
+            {
+                "label": "How is your daily drinking situation in the past year?",
+                "options": [
+                    {
+                        "label": "Drinking alcohol every day, half a catty"
+                    },
+                    {
+                        "label": "Drinking every day, 2 two"
+                    },
+                    {
+                        "label": "Drinking every day, 1 two"
+                    },
+                    {
+                        "label": "Drinking alcohol every day, less than 1 two"
+                    },
+                    {
+                        "label": "Not drinking"
+                    }
+                ]
+            },
+            {
+                "label": "How is your daily smoking situation in the past year?",
+                "options": [
+                    {
+                        "label": "Cigarettes daily, more than 20 cigarettes"
+                    },
+                    {
+                        "label": "Take cigarettes daily, 10-20"
+                    },
+                    {
+                        "label": "Smoking cigarettes daily, 5-10"
+                    },
+                    {
+                        "label": "Cigarettes daily, less than 5"
+                    },
+                    {
+                        "label": "Smoking every day, no fixed amount"
+                    },
+                    {
+                        "label": "do not smoke"
+                    }
+                ]
+            },
+            {
+                "label": "How is your weekly exercise in the past year?",
+                "options": [
+                    {
+                        "label": "Exercise more than 5 times a week (each time lasts ≥ 30 minutes or more)"
+                    },
+                    {
+                        "label": "Exercise 3-5 times a week (every time lasts ≥ 30 minutes or more)"
+                    },
+                    {
+                        "label": "Exercise 2-3 times a week (every time ≥ 30 minutes or more)"
+                    },
+                    {
+                        "label": "Exercise once a week (every time ≥ 30 minutes or more)"
+                    },
+                    {
+                        "label": "Not Exercising"
+                    }
+                ]
+            },
+            {
+                "label": "How many times do you measure your blood pressure every month?",
+                "options": [
+                    {
+                        "label": "4 times"
+                    },
+                    {
+                        "label": "2 times"
+                    },
+                    {
+                        "label": "1 time"
+                    },
+                    {
+                        "label": "Never measured"
+                    }
+                ]
+            },
+            {
+                "label": "Which type of sphygmomanometer do you use?",
+                "options": [
+                    {
+                        "label": "Blood Pressure Monitor "
+                    },
+                    {
+                        "label": "Mercury column blood pressure monitor"
+                    }
+                ]
+            },
+            {
+                "label": "How often do you take a health checkup?",
+                "options": [
+                    {
+                        "label": "Once every 6 months"
+                    },
+                    {
+                        "label": "once a year"
+                    },
+                    {
+                        "label": "Once every two years"
+                    },
+                    {
+                        "label": "Once every 3-5 years "
+                    },
+                    {
+                        "label": "Never done a health checkup"
+                    },
+                    {
+                        "label": "I do not remember"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "hypertension-risk-assesment",
+        "dueDate": "2018-10-05",
+        "coreQuestions": [
+            {
+                "label": "Are there symptoms such as dizziness, headache, and tinnitus?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Drinking and smoking regularly?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Inattention is not concentrated?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Inattention is not concentrated?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Is there a habit of salty food?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Are there high blood pressure patients in immediate family members?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Sleep time is short and the quality is poor?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Is it often in tension and anxiety?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Have you ever had a history of abnormal blood pressure tests?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Obesity?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Men over 60 or postmenopausal women?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Memory loss?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "It is easy to fatigue and can not be relieved the next day?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Suffering from high blood fat?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Have diabetes?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "How many nights do you have at night?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Vision loss?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Is the neck stiff?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "I am flustered and upset?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "Is there often a feeling of numbness in the hands and feet?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            },
+            {
+                "label": "When the walking time is long, both lower limbs are painful?",
+                "options": [
+                    {
+                        "label": "Yes"
+                    },
+                    {
+                        "label": "Not necessarily"
+                    },
+                    {
+                        "label": "No"
+                    }
+                ]
+            }
+        ]
+    }
+]
