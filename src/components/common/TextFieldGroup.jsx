@@ -7,11 +7,13 @@ const TextFieldGroup = ({
   label,
   value,
   type,
-  onChange
+  onChange,
+  info
 }) => {
   return (
     <div className="form-group">
        <label htmlFor={name}>{label}</label>
+       { info && <p className="text-sm text-muted">{info}</p>}
       <input
         type={type}
         className="form-control"
@@ -30,6 +32,7 @@ TextFieldGroup.propTypes =  {
      value: PropTypes.string.isRequired,
      label: PropTypes.string.isRequired,
      type: PropTypes.string.isRequired,
+     info: PropTypes.string,
      onChange: PropTypes.func.isRequired,
 }
 

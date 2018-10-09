@@ -8,10 +8,10 @@ class SideBar extends Component {
                 <section className="sidebar">
                     <div className="user-panel">
                         <div className="pull-left image">
-                            <img src="img/user2-160x160.jpg" className="img-circle" alt="User" />
+                            <img src="/img/user2-160x160.jpg" className="img-circle" alt="User" />
                         </div>
                         <div className="pull-left info">
-                            <p>Alexander Pierce</p>
+                            <p>Phoenix Admin</p>
                             <Link to="#"><i className="fa fa-circle text-success"></i> Online</Link>
                         </div>
                     </div>
@@ -34,8 +34,8 @@ class SideBar extends Component {
                                 </span>
                             </Link>
                             <ul className="treeview-menu" style={{display: "none"}}>
-                                <li className="active"><Link to="/create-qset"><i className="fa fa-circle-o"></i> Create Question Type</Link></li>
-                                <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Type List</Link></li>
+                                <li className="active"><Link to="/create-qset"><i className="fa fa-circle-o"></i> Create Question Set</Link></li>
+                                <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
                     </ul>
