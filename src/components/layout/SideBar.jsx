@@ -59,6 +59,7 @@ class SideBar extends Component {
                         </Link>
                         <ul className="treeview-menu">
                             <li><Link to="/create-form"><i className="fa fa-circle-o"></i> Create Form</Link></li>
+                            <li><Link to="/assignment"><i>Assignment</i></Link></li>
                             <li><Link to="#"><i className="fa fa-circle-o"></i> Morris</Link></li>
                             <li><Link to="#"><i className="fa fa-circle-o"></i> Flot</Link></li>
                             <li><Link to="#"><i className="fa fa-circle-o"></i> Inline charts</Link></li>

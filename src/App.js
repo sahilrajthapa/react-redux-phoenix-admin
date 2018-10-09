@@ -7,6 +7,7 @@ import Header from './components/layout/Header';
 import SideBar from './components/layout/SideBar';
 import Content from './components/content/Content';
 import CreateForm from './components/content/CreateForm'
+import Assignment from './components/content/Assignment'
 
 import "./App.css";
 
@@ -20,6 +21,7 @@ class App extends Component {
             <SideBar />
             <Route exact path="/" component={Content} />
             <Route exact path="/create-form" component={CreateForm} />
+            <Route exact path="/assignment" component={Assignment} />
           </div>
         </Router>
       </Provider>
