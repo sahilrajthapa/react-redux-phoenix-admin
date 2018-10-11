@@ -1,16 +1,54 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Questions from '../common/Questions';
-
+import axios from 'axios'
+import config from "../../config/config"
 class Assignment extends Component {
   state = {
-     assignment:{}
+     assignments:{},
+     unassignedUsers:[]
   };
 
   componentDidMount(){
-      axios.get("http://localhost:3000/assignment/get")
+      //get unassigned users
+        this.getUnassignedUsers();
+        this.getAssignments();
+        axios.delete(`http://${config.PROD_HOST}/question/parent/5bbc429c24fc68090b9b740f/core/5bbc429c24fc68090b9b7466`)
+             .then(result=>console.log(result.data))
+             .catch(error=>console.log(error))
   }
 
+  getUnassignedUsers(){
+    axios.get(`${config.HOST}:${config.PORT}/assignment/unassignedUser`)
+     .then(response=>{
+           this.setState({
+               unassignedUsers:response.data.result
+           })
+    })
+  }
+
+  getAssignments(){
+    axios.get(`${config.HOST}:${config.PORT}/assignment`)
+    .then(response=>{
+          this.setState({
+              assignments:response.data.result
+          })
+    })
+  }
+
+  renderUnassignedUsers(){
+
+  } 
+
+  renderAssignedUsers(){
+    return this.state.assignments.map((assignment,index)=>
+       <tr role="row" className={index/2==0?"even":"odd"}>
+        <td class="sorting_1">{}</td>
+        <td>Firefox 1.0</td>
+        <td>Win 98+ / OSX.2+</td>
+      </tr>
+    );
+        
+  }
 
   render() {
     return (
@@ -74,17 +112,9 @@ class Assignment extends Component {
                                                  </th>
                                              </tr>
                                          </thead>
-                                         <tbody>                
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 1.0</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 1.5</td>
-                                                <td>Win 98+ / OSX.2+</td>                           
-                                            </tr>
+                                         <tbody> 
+                                            this.renderAssignment()                
+                                          
                                          </tbody>                    
                                        </table>                    
                                    </div>
@@ -140,7 +170,8 @@ class Assignment extends Component {
                                     </th>
                                     </tr>
                                 </thead>
-                                <tbody>                
+                                <tbody>        
+                                    this.renderUnassignedUsers();        
                                     <tr role="row" class="odd">
                                         <td class="sorting_1">Gecko</td>
                                         <td>Firefox 1.0</td>

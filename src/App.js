@@ -7,6 +7,7 @@ import CreateQset from './components/content/CreateQset'
 import QuestionsType from "./components/content/QuestionsType";
 import QuestionsList from './components/content/QuestionsList'
 import  CreateQuestion from './components/content/CreateQuestion' 
+import Assignment from "./components/content/Assignment"
 import "./App.css";
 
 class App extends Component {
