@@ -6,12 +6,12 @@ import store from './store';
 
 import Header from './components/layout/Header';
 import SideBar from './components/layout/SideBar';
-import Content from './components/content/Content';
-import CreateQset from './components/content/CreateQset'
-import QuestionsType from "./components/content/QuestionsType";
-import QuestionsList from './components/content/QuestionsList'
-import CreateQuestion from './components/content/CreateQuestion'
-import EditQuestion from './components/content/EditQuestion'
+import Content from './components/question/Content';
+import CreateQset from './components/question/CreateQset'
+import QuestionsType from "./components/question/QuestionsType";
+import QuestionsList from './components/question/QuestionsList'
+import CreateQuestion from './components/question/CreateQuestion'
+import EditQuestion from './components/question/EditQuestion'
 import ReduxToastr from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import "./App.css";

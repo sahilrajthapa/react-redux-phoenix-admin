@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { toastr } from "react-redux-toastr";
 import { GET_QUESTION_TYPE, GET_QUESTION, GET_ERROR } from './types'
-const url = 'http://120.79.226.222/question'
-// const url = 'http://localhost:3001/question'
+// const url = 'http://120.79.226.222/question'
+const url = 'http://localhost:3001/question'
 
 /* ------------------------- ALL QUESTION TYPE  ------------------------ */
 

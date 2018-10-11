@@ -46,29 +46,19 @@ class EditQuestion extends Component {
             } else {
                 filterQuest = question.coreQuestions.filter(q => q._id === id)[0].options
             }
-
-
-            console.log('filterOpt', filterQuest)
             Options = this.state.inputOptions.split(';').map((opt) => {
-                  let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
-                  console.log('filterOpt', filterOpt)
-                   if(!filterOpt) {
-                     return { 
-                         label: opt
-                        }
-                   }
+                let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
+                if (!filterOpt) {
                     return {
-                        label: opt,
-                        _id: filterOpt._id 
-                       
+                        label: opt
                     }
-
-               
+                }
+                return {
+                    label: opt,
+                    _id: filterOpt._id
+                }
             })
         }
-
-        console.log('Options', Options)
-
         if (category === 'IntroQuestion') {
             let introData = {
                 _id: id,
@@ -77,7 +67,6 @@ class EditQuestion extends Component {
                 formType: this.state.formType,
                 options: Options
             }
-            console.log('introdata', introData)
             // question._id === parentId
             // id === introId
             this.props.updateIntroQuestion(question._id, id, type, introData, this.props.history)
@@ -103,18 +92,15 @@ class EditQuestion extends Component {
         let { category, id } = nextProps.match.params;
         let { question } = nextProps.question
         if (Object.keys(question).length > 0) {
-
             if (category === 'IntroQuestion') {
                 editQuest = question.introQuestions.filter(q => q._id === id)[0]
             } else {
                 editQuest = question.coreQuestions.filter(q => q._id === id)[0]
             }
             if (editQuest.options.length > 0) {
-                console.log('editprofile', editQuest.options)
                 let opt = editQuest.options.map((opt => {
                     return opt.label
                 })).join(';')
-                console.log('typeof opt',typeof opt)
                 this.setState({
                     qname: editQuest.name,
                     qlabel: editQuest.label,
