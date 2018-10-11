@@ -11,6 +11,7 @@
     "react-modal": "^3.6.1",
     "react-moment": "^0.8.1",
     "react-redux": "^5.0.7",
+    "react-redux-toastr": "^7.4.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
     "redux": "^4.0.0",
@@ -20,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "pm2 start ./server.sh --name phoneix-admin"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +32,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "proxy": "http://120.79.226.222"
+  ]
 }

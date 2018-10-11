@@ -2,7 +2,7 @@ import { GET_QUESTION_TYPE, GET_QUESTION } from '../actions/types';
 
 const initialState = {
   questionType: [],
-  question: []
+  question: {}
 };
 
 export default function(state = initialState, action) {

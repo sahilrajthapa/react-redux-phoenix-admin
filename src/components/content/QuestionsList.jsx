@@ -7,23 +7,20 @@ import List from '../common/List'
 class QuestionsList extends Component {
 
     componentDidMount() {
-        this.props.getQuestions()
+        this.props.getQuestions(this.props.match.params.type)
     }
-    
+
     render() {
 
         let { question } = this.props.question;
         let { match } = this.props;
-        let filterQuest, introQuestionList, coreQuestionList;
+        let introQuestionList, coreQuestionList;
 
-        if (question.length > 0) {
-            filterQuest = question.filter(quest => quest.type === match.params.type)[0];
+        if (Object.keys(question).length > 0) {
+            introQuestionList = <List question={question.introQuestions} qcategory="IntroQuestion" qtype={match.params.type} parentId={question._id} />
 
-            introQuestionList = <List question={filterQuest.introQuestions} qcategory="IntroQuestion" qtype={match.params.type} parentId={filterQuest._id}/>
-
-            coreQuestionList = <List question={filterQuest.coreQuestions} qcategory="CoreQuestion" qtype={match.params.type} parentId={filterQuest._id}/>
+            coreQuestionList = <List question={question.coreQuestions} qcategory="CoreQuestion" qtype={match.params.type} parentId={question._id} />
         }
-
 
         return (
             <div className="content-wrapper">
@@ -48,7 +45,7 @@ const mapStateToProps = state => ({
     question: state.question
 })
 
-export default connect(mapStateToProps,{ getQuestions })(QuestionsList)
+export default connect(mapStateToProps, { getQuestions })(QuestionsList)
 
 
 

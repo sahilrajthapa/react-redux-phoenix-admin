@@ -36,7 +36,7 @@ class CreateQuestion extends Component {
         e.preventDefault();
         let { question } = this.props.question
         let { type, category } = this.props.match.params
-        let filterQuest, filterOpt = '';
+        let  filterOpt = [];
         
         if(this.state.inputOptions.trim().length > 0){
            filterOpt = this.state.inputOptions.split(';').map((opt) => {
@@ -47,16 +47,16 @@ class CreateQuestion extends Component {
         }
 
         if (category === 'IntroQuestion') {
-            filterQuest = question.filter(quest => quest.type === type)[0]
+
             let introData = {
                 name: this.state.qname,
                 label: this.state.qlabel,
                 formType: this.state.formType,
                 options: filterOpt
             }
-            this.props.addIntroQuestion(filterQuest._id, type, introData, this.props.history)
-        }
-        filterQuest = question.filter(quest => quest.type === type)[0]
+            this.props.addIntroQuestion(question._id, type, introData, this.props.history)
+        } else {
+
         let coreData = {
             name: this.state.qname,
             label: this.state.qlabel,
@@ -64,15 +64,19 @@ class CreateQuestion extends Component {
             options: filterOpt
         }
 
-        console.log(coreData)
-        this.props.addCoreQuestion(filterQuest._id, type, coreData, this.props.history)
+        console.log("Coredata",coreData)
+        this.props.addCoreQuestion(question._id, type, coreData, this.props.history)
+        }
+ 
+
+       
 
 
     }
 
     componentDidMount() {
     
-            this.props.getQuestions()
+            this.props.getQuestions(this.props.match.params.type)
        
     }
 

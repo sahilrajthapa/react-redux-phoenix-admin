@@ -4,14 +4,11 @@ import { connect } from 'react-redux'
 import { deleteIntroQuestion, deleteCoreQuestion } from '../../actions/questionActions'
 
 class List extends Component {
-    onDelete = (qtype, qcategory, parentId, questId) => {
-    console.log(parentId)
-    console.log(qcategory)
-      if (qcategory === 'Introquestion') {
-          console.log('deleted')
-          this.props.deleteIntroQuestion(qtype, parentId, questId, this.props.history)
+    onDelete = (qcategory, parentId, questId) => {
+      if (qcategory === 'IntroQuestion') {
+          this.props.deleteIntroQuestion(parentId, questId)
       } else {
-        this.props.deleteCoreQuestion(qtype, parentId, questId, this.props.history)
+        this.props.deleteCoreQuestion(parentId, questId)
       }
       
     }
@@ -41,7 +38,7 @@ class List extends Component {
                             <ul>{options}</ul>
                         </td>
                         <td><Link to={`/edit-question/${qtype}/${qcategory}/${quest._id}`} className="btn btn-primary">Update</Link></td>
-                        <td><button className="btn btn-danger" onClick={() => this.onDelete(qtype,qcategory, parentId, quest._id)}>Delete</button></td>
+                        <td><button className="btn btn-danger" onClick={() => this.onDelete(qcategory, parentId, quest._id)}>Delete</button></td>
                     </tr>
 
                 )

@@ -12,6 +12,8 @@ import QuestionsType from "./components/content/QuestionsType";
 import QuestionsList from './components/content/QuestionsList'
 import CreateQuestion from './components/content/CreateQuestion'
 import EditQuestion from './components/content/EditQuestion'
+import ReduxToastr from 'react-redux-toastr';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import "./App.css";
 
 class App extends Component {
@@ -20,6 +22,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Fragment>
+            <ReduxToastr preventDuplicates position='bottom-right' transitionIn='fadeIn' transitionOut='fadeOut' />
             <Header />
             <SideBar />
             <Switch>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addIntroQuestion, addCoreQuestion, getQuestions } from '../../actions/questionActions'
+import { updateIntroQuestion, updateCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
 
 class EditQuestion extends Component {
@@ -36,57 +36,85 @@ class EditQuestion extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         let { question } = this.props.question
-        let { type, category } = this.props.match.params
-        let filterQuest, filterOpt = '';
+        let { type, id, category } = this.props.match.params
+        let Options = [];
+        let filterQuest;
 
         if (this.state.inputOptions.trim().length > 0) {
-            filterOpt = this.state.inputOptions.split(';').map((opt) => {
-                return {
-                    label: opt
-                }
+            if (category === 'IntroQuestion') {
+                filterQuest = question.introQuestions.filter(q => q._id === id)[0].options
+            } else {
+                filterQuest = question.coreQuestions.filter(q => q._id === id)[0].options
+            }
+
+
+            console.log('filterOpt', filterQuest)
+            Options = this.state.inputOptions.split(';').map((opt) => {
+                  let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
+                  console.log('filterOpt', filterOpt)
+                   if(!filterOpt) {
+                     return { 
+                         label: opt
+                        }
+                   }
+                    return {
+                        label: opt,
+                        _id: filterOpt._id 
+                       
+                    }
+
+               
             })
         }
 
+        console.log('Options', Options)
+
         if (category === 'IntroQuestion') {
-            filterQuest = question.filter(quest => quest.type === type)[0]
             let introData = {
+                _id: id,
                 name: this.state.qname,
                 label: this.state.qlabel,
                 formType: this.state.formType,
-                options: filterOpt
+                options: Options
             }
-            this.props.addIntroQuestion(filterQuest._id, type, introData, this.props.history)
+            console.log('introdata', introData)
+            // question._id === parentId
+            // id === introId
+            this.props.updateIntroQuestion(question._id, id, type, introData, this.props.history)
+        } else {
+            let coreData = {
+                _id: id,
+                name: this.state.qname,
+                label: this.state.qlabel,
+                formType: this.state.formType,
+                options: Options
+            }
+            this.props.updateCoreQuestion(question._id, id, type, coreData, this.props.history)
         }
-        filterQuest = question.filter(quest => quest.type === type)[0]
-        let coreData = {
-            name: this.state.qname,
-            label: this.state.qlabel,
-            formType: this.state.formType,
-            options: filterOpt
-        }
-        this.props.addCoreQuestion(filterQuest._id, type, coreData, this.props.history)
+
     }
 
     componentDidMount() {
-        this.props.getQuestions()
+        this.props.getQuestions(this.props.match.params.type)
     }
 
     componentWillReceiveProps(nextProps) {
-        let editQuestionSet, editQuest;
-        let { type, category, id } = nextProps.match.params;
-        if (nextProps.question.question.length > 0) {
-            editQuestionSet = nextProps.question.question.filter(quest => quest.type === type)[0]
+        let editQuest;
+        let { category, id } = nextProps.match.params;
+        let { question } = nextProps.question
+        if (Object.keys(question).length > 0) {
 
             if (category === 'IntroQuestion') {
-                editQuest = editQuestionSet.introQuestions.filter(q => q._id === id)[0]
+                editQuest = question.introQuestions.filter(q => q._id === id)[0]
             } else {
-                editQuest = editQuestionSet.coreQuestions.filter(q => q._id === id)[0]
+                editQuest = question.coreQuestions.filter(q => q._id === id)[0]
             }
-
-            if (editQuest.formType === 'checkbox' || editQuest.formType === 'radio') {
+            if (editQuest.options.length > 0) {
+                console.log('editprofile', editQuest.options)
                 let opt = editQuest.options.map((opt => {
                     return opt.label
                 })).join(';')
+                console.log('typeof opt',typeof opt)
                 this.setState({
                     qname: editQuest.name,
                     qlabel: editQuest.label,
@@ -100,7 +128,6 @@ class EditQuestion extends Component {
                     qname: editQuest.name,
                     qlabel: editQuest.label,
                     formType: editQuest.formType,
-                    inputOptions: editQuest.options,
                 })
             }
 
@@ -197,4 +224,4 @@ const mapStateToProps = state => ({
     question: state.question
 })
 
-export default connect(mapStateToProps, { addIntroQuestion, addCoreQuestion, getQuestions })(withRouter(EditQuestion));
+export default connect(mapStateToProps, { updateIntroQuestion, updateCoreQuestion, getQuestions })(withRouter(EditQuestion));
