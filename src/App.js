@@ -34,7 +34,7 @@ class App extends Component {
               <Route path="/create-question/:type/:category" component={CreateQuestion} />
               <Route path="/edit-question/:type/:category/:id" component={EditQuestion} />
               <Route path="/unassigned" component={Unassigned} />
-              <Route exact path="/" component={Content} />
+              <Route exact path="/admin" component={Content} />
             </Switch>
           </Fragment>
         </Router>
