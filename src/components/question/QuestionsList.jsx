@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import { getQuestions } from '../../actions/questionActions'
 import List from '../common/List'
+import ContentHeader from '../common/ContentHeader'
 
 class QuestionsList extends Component {
 
@@ -24,21 +25,17 @@ class QuestionsList extends Component {
 
         return (
             <div className="content-wrapper">
-                <div className="content-header">
-                    <h1>
-                        Questions
-              </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Questions</li>
-                    </ol>
-                </div>
+                <ContentHeader  heading="Questions" subHeading="Questions"/>
                 {introQuestionList}
                 {coreQuestionList}
             </div>
         )
     }
+}
+
+QuestionsList.propTypes = {
+    question: PropTypes.object.isRequired,
+    getQuestions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

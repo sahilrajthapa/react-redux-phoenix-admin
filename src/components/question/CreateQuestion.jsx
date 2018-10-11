@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addIntroQuestion, addCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ContentHeader from '../common/ContentHeader'
 
 class CreateQuestion extends Component {
     state = {
@@ -47,7 +48,6 @@ class CreateQuestion extends Component {
         }
 
         if (category === 'IntroQuestion') {
-
             let introData = {
                 name: this.state.qname,
                 label: this.state.qlabel,
@@ -63,15 +63,8 @@ class CreateQuestion extends Component {
             formType: this.state.formType,
             options: filterOpt
         }
-
-        console.log("Coredata",coreData)
         this.props.addCoreQuestion(question._id, type, coreData, this.props.history)
         }
- 
-
-       
-
-
     }
 
     componentDidMount() {
@@ -97,16 +90,7 @@ class CreateQuestion extends Component {
         ));
         return (
             <div className="content-wrapper">
-                <div className="content-header">
-                    <h1>
-                        Create questions
-              </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Create Question</li>
-                    </ol>
-                </div>
+                <ContentHeader heading="Create Question" subHeading="Questions"/>
                 <div className="content">
                     <div className="row">
                         <div className="col-md-6">

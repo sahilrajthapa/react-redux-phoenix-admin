@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateIntroQuestion, updateCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ContentHeader from '../common/ContentHeader'
 
 class EditQuestion extends Component {
     state = {
@@ -137,16 +138,7 @@ class EditQuestion extends Component {
         ));
         return (
             <div className="content-wrapper">
-                <div className="content-header">
-                    <h1>
-                        Create questions
-              </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Create Question</li>
-                    </ol>
-                </div>
+                <ContentHeader heading="Edit Question" subHeading="Questions"/>
                 <div className="content">
                     <div className="row">
                         <div className="col-md-6">

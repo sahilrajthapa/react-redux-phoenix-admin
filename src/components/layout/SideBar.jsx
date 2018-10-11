@@ -38,6 +38,18 @@ class SideBar extends Component {
                                 <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
+                        <li className="treeview active">
+                            <Link to="#">
+                                <i className="fa fa-user"></i> <span>Users</span>
+                                <span className="pull-right-container">
+                                    <i className="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </Link>
+                            <ul className="treeview-menu" style={{display: "none"}}>
+                                <li className="active"><Link to="/unassigned"><i className="fa fa-circle-o"></i> Unassigned Users</Link></li>
+                                <li><Link to="/assigned"><i className="fa fa-circle-o"></i>Assigned Users</Link></li>
+                            </ul>
+                        </li>
                     </ul>
                 </section>
             </aside>

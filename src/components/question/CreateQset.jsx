@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import {  withRouter } from 'react-router-dom'
 import  { connect } from 'react-redux';
 import { addQuestionType } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ContentHeader from '../common/ContentHeader'
 
 class CreateForm extends Component {
   state = {
@@ -28,16 +29,7 @@ class CreateForm extends Component {
   render() {
     return (
       <div className="content-wrapper">
-        <div className="content-header">
-          <h1>
-            Create Question Set
-          </h1>
-          <ol className="breadcrumb">
-            <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-            <li><Link to="#">Questions</Link></li>
-            <li className="active">Create Question Set</li>
-          </ol>
-        </div>
+        <ContentHeader heading="Create Question Set" subHeading="Questions"/>
         <div className="content">
           <div className="row">
             <div className="col-md-6">

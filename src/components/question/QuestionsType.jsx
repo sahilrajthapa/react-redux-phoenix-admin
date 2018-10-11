@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getQuestionType } from '../../actions/questionActions'
 import Moment from 'react-moment'
+import ContentHeader from '../common/ContentHeader'
 
 class QuestionsType extends Component {
 
@@ -27,16 +28,7 @@ class QuestionsType extends Component {
         }
         return (
             <div className="content-wrapper" >
-                <section className="content-header">
-                    <h1>
-                        Questions Set
-                    </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Questions Set</li>
-                    </ol>
-                </section>
+                <ContentHeader heading="Questions Set" subHeading="Questions"/>
                 <section className="content">
                     <div className="row">
                         <div className="col-md-12">

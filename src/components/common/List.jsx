@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import { deleteIntroQuestion, deleteCoreQuestion } from '../../actions/questionActions'
 
@@ -86,6 +87,15 @@ class List extends Component {
             </div>
         )
     }
+}
+
+List.propTypes = {
+    question: PropTypes.array.isRequired,
+    qtype: PropTypes.string.isRequired,
+    qcategory: PropTypes.string.isRequired,
+    parentId: PropTypes.string.isRequired,
+    deleteIntroQuestion: PropTypes.func.isRequired,
+    deleteCoreQuestion: PropTypes.func.isRequired
 }
 
 export default connect(null, { deleteIntroQuestion, deleteCoreQuestion })(withRouter(List))

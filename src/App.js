@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from 'react-redux'
+import ReduxToastr from 'react-redux-toastr';
 
 import store from './store';
 
@@ -12,7 +13,8 @@ import QuestionsType from "./components/question/QuestionsType";
 import QuestionsList from './components/question/QuestionsList'
 import CreateQuestion from './components/question/CreateQuestion'
 import EditQuestion from './components/question/EditQuestion'
-import ReduxToastr from 'react-redux-toastr';
+import Unassigned from './components/user-assignment/Unassigned'
+
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import "./App.css";
 
@@ -31,6 +33,7 @@ class App extends Component {
               <Route path="/qset/:type" component={QuestionsList} />
               <Route path="/create-question/:type/:category" component={CreateQuestion} />
               <Route path="/edit-question/:type/:category/:id" component={EditQuestion} />
+              <Route path="/unassigned" component={Unassigned} />
               <Route exact path="/" component={Content} />
             </Switch>
           </Fragment>
