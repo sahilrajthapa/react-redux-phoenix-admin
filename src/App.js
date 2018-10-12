@@ -14,6 +14,7 @@ import QuestionsList from './components/question/QuestionsList'
 import CreateQuestion from './components/question/CreateQuestion'
 import EditQuestion from './components/question/EditQuestion'
 import Unassigned from './components/user-assignment/Unassigned'
+import Assigned from './components/user-assignment/Assigned'
 
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import "./App.css";
@@ -34,8 +35,9 @@ class App extends Component {
               <Route path="/create-question/:type/:category" component={CreateQuestion} />
               <Route path="/edit-question/:type/:category/:id" component={EditQuestion} />
               <Route path="/unassigned" component={Unassigned} />
+              <Route path="/assigned" component={Assigned} />
               <Route exact path="/admin" component={Content} />
-            </Switch>
+              </Switch>   
           </Fragment>
         </Router>
       </Provider>

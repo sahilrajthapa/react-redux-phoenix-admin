@@ -31,7 +31,8 @@ class AssignmentList extends Component {
                                 <th>City</th>
                                 <th>Age</th>
                                 <th>Status</th>
-                                { status === "assigned" ? (<th>Assigned To</th>) : ''}
+                                {status === 'unassigned' ? (<th></th>) : '' }
+                                { status === "assigned" ? (<th>Assigned Doctor</th>) : ''}
                             </tr>
                                <tr>
                                    <td>1</td>
@@ -43,9 +44,12 @@ class AssignmentList extends Component {
                                    <td>London</td>
                                    <td>27</td>
                                    <td> 
-                                   { status === "assigned" ? (<button type="button" class="btn btn-block btn-info btn-xs">Unassigned</button>) : 'Assigned' }</td>
+                                    { status === "assigned" ? 'Assigned' :  'Unassigned' }</td>
                                    <td>
-                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user4-128x128.jpg" alt="profile picture1" />) : ''}
+                                   <td>
+                                    { status === "unassigned" ? (<button type="button" class="btn btn-block btn-info btn-xs">Assign To</button>) : ''}
+                                   </td>
+                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user8-128x128.jpg" alt="profile picture1" />) : ''}
                                    </td>
                                </tr>
                                <tr>
@@ -58,10 +62,12 @@ class AssignmentList extends Component {
                                    <td>London</td>
                                    <td>27</td>
                                    <td> 
-                                   { status === "assigned" ? (<th><button type="button" class="btn btn-block btn-info btn-xs">Unassigned</button></th>) : (<th>Assigned</th>)
-                                  }</td>
+                                    { status === "assigned" ? 'Assigned' :  'Unassigned' }</td>
                                    <td>
-                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user4-128x128.jpg" alt="profile picture1" />) : ''}
+                                   <td>
+                                    { status === "unassigned" ? (<button type="button" class="btn btn-block btn-info btn-xs">Assign To</button>) : ''}
+                                   </td>
+                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user7-128x128.jpg" alt="profile picture1" />) : ''}
                                    </td>
                                </tr>
                                <tr>
@@ -73,7 +79,14 @@ class AssignmentList extends Component {
                                    <td>Male</td>
                                    <td>London</td>
                                    <td>27</td>
-                                   <td><button type="button" class="btn btn-block btn-info btn-xs">Unassigned</button></td>
+                                   <td> 
+                                    { status === "assigned" ? 'Assigned' :  'Unassigned' }</td>
+                                   <td>
+                                   <td>
+                                    { status === "unassigned" ? (<button type="button" class="btn btn-block btn-info btn-xs">Assign To</button>) : ''}
+                                   </td>
+                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user8-128x128.jpg" alt="profile picture1" />) : ''}
+                                   </td>
                                </tr>
                                <tr>
                                    <td>4</td>
@@ -84,7 +97,14 @@ class AssignmentList extends Component {
                                    <td>Male</td>
                                    <td>Perth</td>
                                    <td>37</td>
-                                   <td><button type="button" class="btn btn-block btn-info btn-xs">Unassigned</button></td>
+                                   <td> 
+                                    { status === "assigned" ? 'Assigned' :  'Unassigned' }</td>
+                                   <td>
+                                   <td>
+                                    { status === "unassigned" ? (<button type="button" class="btn btn-block btn-info btn-xs">Assign To</button>) : ''}
+                                   </td>
+                                   { status === "assigned" ? ( <img className="profile-user-img-sm img-responsive img-circle" src="/img/user7-128x128.jpg" alt="profile picture1" />) : ''}
+                                   </td>
                                </tr>
 
                             </tbody></table>
