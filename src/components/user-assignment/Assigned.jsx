@@ -13,5 +13,4 @@ class Assigned extends Component {
     }
 }
 
-
 export default Assigned

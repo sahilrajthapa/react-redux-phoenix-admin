@@ -35,7 +35,7 @@ class QuestionsList extends Component {
 
 QuestionsList.propTypes = {
     question: PropTypes.object.isRequired,
-    getQuestions: PropTypes.object.isRequired
+    getQuestions: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

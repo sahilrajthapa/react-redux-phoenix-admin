@@ -6,15 +6,15 @@ import { deleteIntroQuestion, deleteCoreQuestion } from '../../actions/questionA
 
 class List extends Component {
     onDelete = (qcategory, parentId, questId) => {
-      if (qcategory === 'IntroQuestion') {
-          this.props.deleteIntroQuestion(parentId, questId)
-      } else {
-        this.props.deleteCoreQuestion(parentId, questId)
-      }
-      
+        if (qcategory === 'IntroQuestion') {
+            this.props.deleteIntroQuestion(parentId, questId)
+        } else {
+            this.props.deleteCoreQuestion(parentId, questId)
+        }
+
     }
     render() {
-        let { question, qcategory, qtype , parentId} = this.props
+        let { question, qcategory, qtype, parentId } = this.props
 
         if (question) {
             var list = question.map((quest, index) => {
@@ -51,19 +51,29 @@ class List extends Component {
                     <div className="col-xs-12">
                         <div className="box">
                             <div className="box-header">
-                                <h3 className="box-title">{qcategory} Table</h3>
+                                <div className="row" style={{ marginLeft: 0, marginRight: 0 }}>
+                                    <div className="col-md-6">
+                                        <h3 className="box-title">{qcategory} Table</h3>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="row">
+                                            
+                                            <div className="col-xs-12 col-sm-4 col-md-4 pull-right">
+                                                <div className="input-group input-group-sm custom-input" style={{ width: "150px" }}>
+                                                    <input type="text" name="table_search" className="form-control pull-right" placeholder="Search" />
 
-                                <div className="box-tools">
-                                    <div className="input-group input-group-sm" style={{ width: "150px" }}>
-                                        <input type="text" name="table_search" className="form-control pull-right" placeholder="Search" />
-
-                                        <div className="input-group-btn">
-                                            <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
+                                                    <div className="input-group-btn">
+                                                        <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-xs-12 col-sm-4 col-md-4 pull-right">
+                                                <Link to={`/create-question/${qtype}/${qcategory}`} className="btn btn-primary" style={{ width: "150px", padding: '4px 12px' }}>Add </Link>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <Link to={`/create-question/${qtype}/${qcategory}`} className="btn btn-primary" style={{ width: "150px", position: 'absolute', top: '0', right: '160px', padding: '4px 12px' }}>Add </Link>
                                 </div>
+
                             </div>
                             <div className="box-body table-responsive no-padding">
                                 <table className="table table-hover">

@@ -6,8 +6,9 @@ class Unassigned extends Component {
     render() {
         return (
             <div className="content-wrapper">
-                <ContentHeader  heading="Unassigned Users" subHeading="Users"/>
-                <AssignmentList status="unassigned"/>
+                <ContentHeader heading="Unassigned Users" subHeading="Users" />
+                <AssignmentList status="unassigned" />
+                
             </div>
         )
     }

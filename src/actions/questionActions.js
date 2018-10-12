@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { toastr } from "react-redux-toastr";
-import { GET_QUESTION_TYPE, GET_QUESTION, GET_ERROR } from './types'
-const url = 'http://120.79.226.222/question'
-// const url = 'http://localhost:3001/question'
+import { GET_QUESTION_TYPE, GET_QUESTION, GET_ERROR, DELETE_QUESTION_TYPE } from './types'
+import { url} from '../config'
 
 /* ------------------------- ALL QUESTION TYPE  ------------------------ */
 
@@ -40,6 +39,26 @@ export const addQuestionType = (questData, history) => (dispatch) => {
         })
 }
 
+// Delete question type
+export const deleteQuestionType = (qId) => (dispatch) => {
+    axios
+    .delete(`${url}/${qId}`)
+    .then(res => {
+         dispatch({
+             type: DELETE_QUESTION_TYPE,
+             payload: res.data.result
+         })
+         toastr.success("Success", "Question has been deleted");
+    })
+    .catch(err => {
+        dispatch({
+            type: GET_ERROR,
+            payload: err
+        })
+        toastr.error("Oops", "Something went wrong")
+    })
+}
+
 
 /* ------------------------------  SINGLE QUESTION TYPE --------------------- */
 
@@ -47,7 +66,6 @@ export const addQuestionType = (questData, history) => (dispatch) => {
 export const getQuestions = (type) => dispatch => {
     axios.get(`${url}/${type}`)
         .then(res => {
-            console.log(res)
             dispatch({
                 type: GET_QUESTION,
                 payload: res.data

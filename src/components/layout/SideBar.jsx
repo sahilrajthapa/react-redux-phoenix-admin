@@ -26,7 +26,7 @@ class SideBar extends Component {
                     </form>
                     <ul className="sidebar-menu" data-widget="tree">
                         <li className="header">MAIN NAVIGATION</li>
-                        <li className="treeview active">
+                        <li className="treeview">
                             <Link to="#">
                                 <i className="fa fa-table"></i> <span>Questions</span>
                                 <span className="pull-right-container">
@@ -38,7 +38,7 @@ class SideBar extends Component {
                                 <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
-                        <li className="treeview active">
+                        <li className="treeview">
                             <Link to="#">
                                 <i className="fa fa-user"></i> <span>Users</span>
                                 <span className="pull-right-container">
