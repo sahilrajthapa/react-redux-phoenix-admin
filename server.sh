@@ -1,2 +1,5 @@
 echo "Serving Phoneix Admin"
-serve -s build
+env -i git pull origin master;
+npm install;
+npm run build;
+serve -s build;
