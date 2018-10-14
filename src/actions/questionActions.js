@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { toastr } from "react-redux-toastr";
 import { GET_QUESTION_TYPE, GET_QUESTION, GET_ERROR, DELETE_QUESTION_TYPE } from './types'
-import { url} from '../config'
+import { url } from '../config'
 
 /* ------------------------- ALL QUESTION TYPE  ------------------------ */
 
 // Get question type
 export const getQuestionType = () => dispatch => {
-    axios.get(url)
+    axios.get(url.question )
         .then(res =>
             dispatch({
                 type: GET_QUESTION_TYPE,
@@ -25,15 +25,16 @@ export const getQuestionType = () => dispatch => {
 // Add question type
 export const addQuestionType = (questData, history) => (dispatch) => {
     axios
-        .post(url, questData)
-        .then(res => {
+        .post(url.question, questData )
+        .then(res => { 
             history.push('/question-type');
             toastr.success("Success", "Question has been created");
         })
         .catch(err => {
+            console.log('addQuestion err', err.response.data)
             dispatch({
                 type: GET_ERROR,
-                payload: err
+                payload: err.response.data
             })
             toastr.error("Oops", "Something went wrong")
         })
@@ -42,7 +43,7 @@ export const addQuestionType = (questData, history) => (dispatch) => {
 // Delete question type
 export const deleteQuestionType = (qId) => (dispatch) => {
     axios
-    .delete(`${url}/${qId}`)
+    .delete(`${url.question }/${qId}`)
     .then(res => {
          dispatch({
              type: DELETE_QUESTION_TYPE,
@@ -64,7 +65,7 @@ export const deleteQuestionType = (qId) => (dispatch) => {
 
 // Get all questions from a question type
 export const getQuestions = (type) => dispatch => {
-    axios.get(`${url}/${type}`)
+    axios.get(`${url.question }/${type}`)
         .then(res => {
             dispatch({
                 type: GET_QUESTION,
@@ -85,7 +86,7 @@ export const getQuestions = (type) => dispatch => {
 // Add  introquestions
 export const addIntroQuestion = (id, qtype, introData, history) => (dispatch) => {
     axios
-        .post(`${url}/addintro/${id}`, introData)
+        .post(`${url.question }/addintro/${id}`, introData)
         .then(res => {
             history.push(`/qset/${qtype}`)
             toastr.success("Success", "Question has been created");
@@ -102,7 +103,7 @@ export const addIntroQuestion = (id, qtype, introData, history) => (dispatch) =>
 // Update introquestions
 export const updateIntroQuestion = (parentId, introId, qtype, introData, history) => (dispatch) => {
     axios
-    .put(`${url}/parent/${parentId}/intro/${introId}`, introData)
+    .put(`${url.question }/parent/${parentId}/intro/${introId}`, introData)
     .then(res => {
         
         history.push(`/qset/${qtype}`)
@@ -120,7 +121,7 @@ export const updateIntroQuestion = (parentId, introId, qtype, introData, history
 // Delete introquestions
 export const deleteIntroQuestion = ( parentId, questId ) => (dispatch) => {
     axios
-        .delete(`${url}/parent/${parentId}/intro/${questId}`)
+        .delete(`${url.question }/parent/${parentId}/intro/${questId}`)
         .then(res => {
             dispatch({
                 type: GET_QUESTION,
@@ -142,7 +143,7 @@ export const deleteIntroQuestion = ( parentId, questId ) => (dispatch) => {
 // Add  corequestions
 export const addCoreQuestion = (id, qtype, coreData, history) => (dispatch) => {
     axios
-        .post(`${url}/addcore/${id}`, coreData)
+        .post(`${url.question }/addcore/${id}`, coreData)
         .then(res => {
             history.push(`/qset/${qtype}`)
             toastr.success("Success", "Question has been created");
@@ -161,7 +162,7 @@ export const addCoreQuestion = (id, qtype, coreData, history) => (dispatch) => {
 // Update corequestions
 export const updateCoreQuestion = (parentId, coreId, qtype, coreData, history) => (dispatch) => {
     axios
-    .put(`${url}/parent/${parentId}/core/${coreId}`, coreData)
+    .put(`${url.question }/parent/${parentId}/core/${coreId}`, coreData)
     .then(res => {
         console.log('core question updateed', qtype)
         history.push(`/qset/${qtype}`)
@@ -179,7 +180,7 @@ export const updateCoreQuestion = (parentId, coreId, qtype, coreData, history) =
 // Delete corequestions
 export const deleteCoreQuestion = ( parentId, coreId ) => dispatch => {
     axios
-        .delete(`${url}/parent/${parentId}/core/${coreId}`)
+        .delete(`${url.question }/parent/${parentId}/core/${coreId}`)
         .then(res => {
             dispatch({
                 type: GET_QUESTION,

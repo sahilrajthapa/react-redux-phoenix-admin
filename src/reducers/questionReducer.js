@@ -18,11 +18,9 @@ export default function (state = initialState, action) {
         question: action.payload
       }
     case DELETE_QUESTION_TYPE:
-      const newQuestionType = [...state.questionType];
-      const filteredQuestionType = newQuestionType.filter(qtype => qtype._id !== action.payload._id);
       return {
         ...state,
-        questionType: [...filteredQuestionType]
+        questionType: state.questionType.filter(qtype => qtype._id !== action.payload._id)
       }
     default:
       return state;
