@@ -75,6 +75,10 @@ export const assignUser = (assignData, history) => (dispatch) => {
         )
 }
 
+// *  -------------------------------------
+// throwing error while updating assignment
+// -------------------------------------- */
+
 export const updateUserAssignment = (assignId, doctorId, history) => (dispatch) => {
     axios.put(`${url.assignment}/${assignId}`, doctorId)
         .then(res => {

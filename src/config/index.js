@@ -1,4 +1,5 @@
-const host = 'http://localhost:3001'
+// const host = 'http://localhost:3001'
+const host = 'http://120.79.226.222'
 const devHost = 'http://120.79.226.222'
 // const devHost = 'http://localhost:3001'
 
