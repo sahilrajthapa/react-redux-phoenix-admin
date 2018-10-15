@@ -5,7 +5,7 @@ import { url } from '../config'
 
 
 export const getUnassignedUser= () => dispatch => {
-    axios.get(`${url.assignment}/unassignedUser`)
+    axios.get('/assignment/unassignedUser')
         .then(res =>{
             console.log('unassigned user', res.data);
             dispatch({
@@ -22,7 +22,7 @@ export const getUnassignedUser= () => dispatch => {
 }
 
 export const getAssignedUser = () => dispatch => {
-    axios.get(url.assignment)
+    axios.get('/assignment')
         .then(res =>{
             console.log('assigned user', res.data);
             dispatch({
@@ -39,7 +39,7 @@ export const getAssignedUser = () => dispatch => {
 }
 
 export const getDoctors = () => dispatch => {
-    axios.get(`${url.doctor}`)
+    axios.get('/doctor')
     .then(res =>{
         dispatch({
             type: GET_DOCTORS,
@@ -55,7 +55,7 @@ export const getDoctors = () => dispatch => {
 }
 
 export const assignUser = (assignData, history) => (dispatch) => {
-    axios.post(`${url.assignment}`, assignData)
+    axios.post('/assignment', assignData)
     .then(res =>{
         history.push('/assigned')
         dispatch({

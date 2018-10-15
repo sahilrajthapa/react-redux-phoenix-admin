@@ -16,8 +16,8 @@ const validate = combineValidators({
 
 class EditQuestion extends Component {
     state = {
-        formType: '',
-        showOptions: false,
+        formType: this.props.initialValues.formType || '',
+        showOptions: this.props.initialValues.inputOptions ? true : false
     }
 
     onFormTypeChange = (e) => {
@@ -60,56 +60,22 @@ class EditQuestion extends Component {
                 }
             })
         }
+
+        let questData = {
+            _id: id,
+            name: this.state.qname,
+            label: this.state.qlabel,
+            formType: this.state.formType,
+            options: Options
+        }
         if (category === 'IntroQuestion') {
-            let introData = {
-                _id: id,
-                name: this.state.qname,
-                label: this.state.qlabel,
-                formType: this.state.formType,
-                options: Options
-            }
-            // question._id === parentId
-            // id === introId
-            this.props.updateIntroQuestion(question._id, id, type, introData, this.props.history)
+            this.props.updateIntroQuestion(question._id, id, type, questData, this.props.history)
         } else {
-            let coreData = {
-                _id: id,
-                name: this.state.qname,
-                label: this.state.qlabel,
-                formType: this.state.formType,
-                options: Options
-            }
-            this.props.updateCoreQuestion(question._id, id, type, coreData, this.props.history)
+            this.props.updateCoreQuestion(question._id, id, type, questData, this.props.history)
         }
 
     }
 
-    componentDidMount() {
-        this.props.getQuestions(this.props.match.params.type)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        let editQuest;
-        let { category, id } = nextProps.match.params;
-        let { question } = nextProps.question
-        if (Object.keys(question).length > 0) {
-            if (category === 'IntroQuestion') {
-                editQuest = question.introQuestions.filter(q => q._id === id)[0]
-            } else {
-                editQuest = question.coreQuestions.filter(q => q._id === id)[0]
-            }     
-            if(editQuest.formType === 'checkbox' || editQuest.formType === 'radio') {
-                this.setState({
-                    formType: editQuest.formType,
-                    showOptions: true
-                })
-            } else {
-                this.setState({
-                    formType: editQuest.formType
-                })
-            }
-        }
-    }
 
     render() {
         const { invalid, submitting, pristine } = this.props;
@@ -127,6 +93,8 @@ class EditQuestion extends Component {
                 {option.value}
             </option>
         ));
+
+        console.log(this.props)
         return (
             <div className="content-wrapper">
                 <ContentHeader heading="Edit Question" subHeading="Questions" />
@@ -204,13 +172,12 @@ const mapStateToProps = (state, ownProps) => {
 
         }
     }
-
     let newQuest = {
         qname: editQuest.name,
         qlabel: editQuest.label,
+        formType: editQuest.formType,
         inputOptions: opt
     }
-
     return {
         initialValues: newQuest,
         question: state.question
