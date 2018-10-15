@@ -38,7 +38,7 @@ class List extends Component {
                         <td>
                             <ul>{options}</ul>
                         </td>
-                        <td><Link to={`/edit-question/${qtype}/${qcategory}/${quest._id}`} className="btn btn-primary">Update</Link></td>
+                        <td><Link to={`/admin/edit-question/${qtype}/${qcategory}/${quest._id}`} className="btn btn-primary">Update</Link></td>
                         <td><button className="btn btn-danger" onClick={() => this.onDelete(qcategory, parentId, quest._id)}>Delete</button></td>
                     </tr>
 
@@ -68,7 +68,7 @@ class List extends Component {
                                                 </div>
                                             </div>
                                             <div className="col-xs-12 col-sm-4 col-md-4 pull-right">
-                                                <Link to={`/create-question/${qtype}/${qcategory}`} className="btn btn-primary" style={{ width: "150px", padding: '4px 12px' }}>Add </Link>
+                                                <Link to={`/admin/create-question/${qtype}/${qcategory}`} className="btn btn-primary" style={{ width: "150px", padding: '4px 12px' }}>Add </Link>
                                             </div>
                                         </div>
                                     </div>

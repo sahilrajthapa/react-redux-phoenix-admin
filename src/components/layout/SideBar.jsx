@@ -34,8 +34,8 @@ class SideBar extends Component {
                                 </span>
                             </Link>
                             <ul className="treeview-menu" style={{display: "none"}}>
-                                <li className="active"><Link to="/create-qset"><i className="fa fa-circle-o"></i> Create Question Set</Link></li>
-                                <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
+                                <li className="active"><Link to="/admin/create-qset"><i className="fa fa-circle-o"></i> Create Question Set</Link></li>
+                                <li><Link to="/admin/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
                         <li className="treeview">
@@ -46,8 +46,8 @@ class SideBar extends Component {
                                 </span>
                             </Link>
                             <ul className="treeview-menu" style={{display: "none"}}>
-                                <li className="active"><Link to="/unassigned"><i className="fa fa-circle-o"></i> Unassigned Users</Link></li>
-                                <li><Link to="/assigned"><i className="fa fa-circle-o"></i>Assigned Users</Link></li>
+                                <li className="active"><Link to="/admin/unassigned"><i className="fa fa-circle-o"></i> Unassigned Users</Link></li>
+                                <li><Link to="/admin/assigned"><i className="fa fa-circle-o"></i>Assigned Users</Link></li>
                             </ul>
                         </li>
                     </ul>

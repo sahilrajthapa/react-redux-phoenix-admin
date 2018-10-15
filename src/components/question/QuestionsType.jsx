@@ -21,10 +21,10 @@ class QuestionsType extends Component {
                return (
                     <tr key={qtype.type}>
                         <td>{index + 1}</td>
-                        <td><Link to={`/qset/${qtype.type}`}>{qtype.type}</Link></td>
-                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.createdAt}</Moment></Link></td>
-                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.dueDate}</Moment></Link></td>
-                        <td><Link to={`/qset/${qtype.type}`} className="btn btn-block btn-info btn-xs">View</Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}>{qtype.type}</Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.createdAt}</Moment></Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.dueDate}</Moment></Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`} className="btn btn-block btn-info btn-xs">View</Link></td>
                         <td><button type="button" className="btn btn-block btn-danger btn-xs" onClick={() => this.onDelete(qtype._id)}>Delete</button></td>
                     </tr >
                 )

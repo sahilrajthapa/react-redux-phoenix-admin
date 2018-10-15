@@ -29,13 +29,13 @@ class App extends Component {
             <Header />
             <SideBar />
             <Switch>
-              <Route path="/create-qset" component={CreateQset} />
-              <Route path="/question-type" component={QuestionsType} />
-              <Route path="/qset/:type" component={QuestionsList} />
-              <Route path="/create-question/:type/:category" component={CreateQuestion} />
-              <Route path="/edit-question/:type/:category/:id" component={EditQuestion} />
-              <Route path="/unassigned" component={Unassigned} />
-              <Route path="/assigned" component={Assigned} />
+              <Route path="/admin/create-qset" component={CreateQset} />
+              <Route path="/admin/question-type" component={QuestionsType} />
+              <Route path="/admin/qset/:type" component={QuestionsList} />
+              <Route path="/admin/create-question/:type/:category" component={CreateQuestion} />
+              <Route path="/admin/edit-question/:type/:category/:id" component={EditQuestion} />
+              <Route path="/admin/unassigned" component={Unassigned} />
+              <Route path="/admin/assigned" component={Assigned} />
               <Route exact path="/admin" component={Content} />
               </Switch>   
           </Fragment>

@@ -6,7 +6,7 @@ import {loadState, saveState} from './localStorage'
 
 const persistedState = loadState();
 
-const initialState = {};
+// const initialState = {};
 
 const middleware = [thunk];
 
@@ -29,5 +29,5 @@ store.subscribe(() => {
   saveState(store.getState());
 });
 
-
+// console.log(store.getState())
 export default store;

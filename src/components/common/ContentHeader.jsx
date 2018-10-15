@@ -9,7 +9,7 @@ const ContentHeader = ({heading, subHeading}) => {
                 {heading}
               </h1>
             <ol className="breadcrumb">
-                <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
+                <li><Link to="/admin"><i className="fa fa-dashboard"></i> Home</Link></li>
                 <li><Link to="#">{subHeading}</Link></li>
                 <li className="active">{heading}</li>
             </ol>

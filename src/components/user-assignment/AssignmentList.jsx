@@ -4,20 +4,32 @@ import UserModal from './UserModal'
 class AssignmentList extends Component {
     state = {
         open: false,
-        id: null
+        userId: null,
+        doctorId: null,
+        assignId: null
     }
 
-    assignUserClick = (id) => {
+    assignUser = (userId) => {
         this.setState({
             open: true,
-            id: id
+            userId
+        })
+    }
+
+    updateUser = (assignId, doctorId) => {
+        this.setState({
+            open: true,
+            assignId,
+            doctorId
         })
     }
 
     closeModal = () => {
         this.setState({
             open: false,
-            id: null
+            userId: null,
+            doctorId: null,
+            assignId: null
         })
     }
 
@@ -27,23 +39,23 @@ class AssignmentList extends Component {
         let userList;
         if (users && users.length > 0) {
             if (status === 'unassigned') {
-               userList = users.map((user, index) => {
-                        return (
-                            <tr key={user._id}>
-                                <td>{index + 1}</td>
-                                <td>
-                                    <img className="profile-user-img-sm img-responsive img-circle" src={user.headimgurl} alt={user.nickname} />
-                                </td>
-                                <td>{user.nickname}</td>
-                                <td>Unassigned</td>
-                                <td>
-                                    <button type="button" onClick={() => this.assignUserClick(user._id)} className="btn btn-block btn-info btn-xs">Assign To</button>
-                                </td>
-                            </tr>
-                        )
+                userList = users.map((user, index) => {
+                    return (
+                        <tr key={user._id}>
+                            <td>{index + 1}</td>
+                            <td>
+                                <img className="profile-user-img-sm img-responsive img-circle" src={user.headimgurl} alt={user.nickname} />
+                            </td>
+                            <td>{user.nickname}</td>
+                            <td>Unassigned</td>
+                            <td>
+                                <button type="button" onClick={() => this.assignUser(user._id)} className="btn btn-block btn-info btn-xs">Assign To</button>
+                            </td>
+                        </tr>
+                    )
                 })
             } else {
-               userList = users.map((user, index) => {
+                userList = users.map((user, index) => {
                     return (
                         < tr key={user._id} >
                             <td>{index + 1}</td>
@@ -57,6 +69,12 @@ class AssignmentList extends Component {
                             </td>
                             <td>
                                 {user.doctor.nickname}
+                            </td>
+                            <td>
+                                <button type="button" onClick={() => this.updateUser(user._id, user.doctor._id)} className="btn btn-block btn-info btn-xs">Update </button>
+                            </td>
+                            <td>
+                                <button type="button" className="btn btn-block btn-danger btn-xs">Delete</button>
                             </td>
                         </tr >
                     )
@@ -91,9 +109,11 @@ class AssignmentList extends Component {
                                             <th>Status</th>
                                             {status === "assigned" ? (<th>Assigned Doctor</th>) : null}
                                             {status === "assigned" ? (<th>Doctor Name</th>) : null}
+                                            {status === "assigned" ? (<th></th>) : null}
+                                            {status === "assigned" ? (<th></th>) : null}
                                         </tr>
                                         {userList}
-                                        
+
                                     </tbody></table>
                             </div>
 
@@ -101,7 +121,7 @@ class AssignmentList extends Component {
 
                     </div>
                 </div>
-                {this.state.open && <UserModal open={this.state.open} userId={this.state.id} closeModal={this.closeModal} />}
+                {this.state.open && <UserModal open={this.state.open} userId={this.state.userId} doctorId={this.state.doctorId} assignId={this.state.assignId} closeModal={this.closeModal} />}
             </div >
         )
     }
