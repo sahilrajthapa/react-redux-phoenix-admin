@@ -7,7 +7,6 @@ import { url } from '../config'
 
 // Get question type
 export const getQuestionType = () => dispatch => {
-    console.log('question')
     axios.get(url.question)
         .then(res =>
             dispatch({
@@ -32,7 +31,6 @@ export const addQuestionType = (questData, history) => (dispatch) => {
             toastr.success("Success", "Question has been created");
         })
         .catch(err => {
-            console.log('addQuestion err', err.response.data)
             dispatch({
                 type: GET_ERROR,
                 payload: err.response.data

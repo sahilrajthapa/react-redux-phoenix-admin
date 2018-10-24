@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import UserModal from './UserModal'
 
 class AssignmentList extends Component {
@@ -24,6 +24,10 @@ class AssignmentList extends Component {
         })
     }
 
+    deleteUserClick = (assignId) => {
+        this.props.deleteUser(assignId)
+    }
+
     closeModal = () => {
         this.setState({
             open: false,
@@ -34,11 +38,10 @@ class AssignmentList extends Component {
     }
 
     render() {
-        const { status, users } = this.props
-
+        const { status, users, doctors } = this.props
         let userList;
         if (users && users.length > 0) {
-            if (status === 'unassigned') {
+            if (status && status === 'unassigned') {
                 userList = users.map((user, index) => {
                     return (
                         <tr key={user._id}>
@@ -65,16 +68,16 @@ class AssignmentList extends Component {
                             <td>{user.user.nickname}</td>
                             <td> Assigned</td>
                             <td>
-                                <img className="profile-user-img-sm img-responsive img-circle" src={user.doctor.headimgurl} alt={user.doctor.nickname} />
+                                <img className="profile-user-img-sm img-responsive img-circle" src={ user.doctor ? user.doctor.headimgurl : null} alt={user.doctor ?user.doctor.nickname: null} />
                             </td>
                             <td>
-                                {user.doctor.nickname}
+                                {user.doctor ? user.doctor.nickname: null}
                             </td>
                             <td>
                                 <button type="button" onClick={() => this.updateUser(user._id, user.doctor._id)} className="btn btn-block btn-info btn-xs">Update </button>
                             </td>
                             <td>
-                                <button type="button" className="btn btn-block btn-danger btn-xs">Delete</button>
+                                <button type="button" className="btn btn-block btn-danger btn-xs" onClick={() => this.deleteUserClick(user._id)}>Delete</button>
                             </td>
                         </tr >
                     )
@@ -121,7 +124,7 @@ class AssignmentList extends Component {
 
                     </div>
                 </div>
-                {this.state.open && <UserModal open={this.state.open} userId={this.state.userId} doctorId={this.state.doctorId} assignId={this.state.assignId} closeModal={this.closeModal} />}
+                {this.state.open && <UserModal open={this.state.open} userId={this.state.userId} doctorId={this.state.doctorId} assignId={this.state.assignId} closeModal={this.closeModal} doctors={doctors}/>}
             </div >
         )
     }

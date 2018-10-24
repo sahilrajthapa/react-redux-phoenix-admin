@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from "react-responsive-modal";
 import { withRouter } from 'react-router-dom'
 import  { connect } from  'react-redux'
-import { getDoctors, assignUser, updateUserAssignment } from '../../actions/assignmentActions'
+import { assignUser, updateUserAssignment } from '../../actions/assignmentActions'
 
  class UserModal extends Component {
     onCloseModal = () => {
@@ -19,15 +19,13 @@ import { getDoctors, assignUser, updateUserAssignment } from '../../actions/assi
     }
 
     updateAssignment = (assignId, doctorId) => {
-        console.log(assignId, assignId)
-        console.log(doctorId, doctorId)
+        const docData = {
+            doctorId
+        }
         this.props.closeModal()
-        this.props.updateUserAssignment(assignId, doctorId, this.props.history)
+        this.props.updateUserAssignment(assignId, docData)
     }
-    
-    componentDidMount() {
-         this.props.getDoctors()
-    }
+ 
 
   render() {
      
@@ -44,7 +42,7 @@ import { getDoctors, assignUser, updateUserAssignment } from '../../actions/assi
                 <td>{doctor.nickname}</td>
                 <td>Cardiologist</td>
                { userId && <td><button type="button" className="btn btn-block btn-info btn-xs" onClick={() => this.assignTo(userId, doctor._id)}>Assign To</button></td>}
-               {  assignId &&  doctorId && <td><button type="button" className="btn btn-block btn-info btn-xs" onClick={() => this.updateAssignment(assignId, doctorId)}>Update</button></td>}
+               {  assignId &&  doctorId && <td><button type="button" className="btn btn-block btn-info btn-xs" onClick={() => this.updateAssignment(assignId, doctor._id)}>Update</button></td>}
                
             </tr>
              )
@@ -70,8 +68,8 @@ import { getDoctors, assignUser, updateUserAssignment } from '../../actions/assi
   }
 }
 
-const mapStateToProps = state => ({
-    doctors: state.assignment.doctors
-})
+// const mapStateToProps = state => ({
+//     doctors: state.assignment.doctors
+// })
 
-export default connect(mapStateToProps, { getDoctors, assignUser, updateUserAssignment })(withRouter(UserModal))
+export default connect(null, {  assignUser, updateUserAssignment })(withRouter(UserModal))

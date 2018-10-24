@@ -7,13 +7,15 @@ import { getUnassignedUser, getDoctors } from '../../actions/assignmentActions'
 class Unassigned extends Component {
     componentDidMount () {
         this.props.getUnassignedUser()
+        this.props.getDoctors()
     }
+  
     render() {
-        const { unAssignedUser } = this.props.assignment
+        const { unAssignedUser, doctors } = this.props.assignment
         return (
             <div className="content-wrapper">
                 <ContentHeader heading="Unassigned Users" subHeading="Users" />
-                <AssignmentList status="unassigned" users={unAssignedUser}/>      
+                <AssignmentList status="unassigned" users={unAssignedUser} doctors={doctors} />      
             </div>
         )
     }
