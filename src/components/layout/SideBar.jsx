@@ -50,6 +50,12 @@ class SideBar extends Component {
                                 <li><Link to="/admin/assigned"><i className="fa fa-circle-o"></i>Assigned Users</Link></li>
                             </ul>
                         </li>
+                        <li>
+                            <Link to="/admin/qrcode">
+                                <i className="fa fa-qrcode"></i> <span>QR Codes</span>
+                            </Link>                
+                                   
+                        </li>
                     </ul>
                 </section>
             </aside>

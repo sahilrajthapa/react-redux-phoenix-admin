@@ -195,4 +195,3 @@ export const deleteCoreQuestion = ( parentId, coreId ) => dispatch => {
            toastr.error("Oops", "Something went wrong")
        })
 }
-

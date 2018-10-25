@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form'
 import questionReducer from './questionReducer'
 import errorReducer from './errorReducer'
 import assignmentReducer from './assignmentReducer'
+import userReducer from './userReducer'
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
     error: errorReducer,
     toastr: toastrReducer,
     form: formReducer,
-    assignment: assignmentReducer
+    assignment: assignmentReducer,
+    userList:userReducer
 })
