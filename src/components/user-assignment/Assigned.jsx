@@ -29,4 +29,4 @@ const mapStateToProps = state => ({
     assignment: state.assignment
 })
 
-export default connect(mapStateToProps ,{getAssignedUser, deleteUserAssignment, getDoctors})(Assigned)
+export default connect(mapStateToProps ,{getAssignedUser, deleteUserAssignment, getDoctors})(Assigned);

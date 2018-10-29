@@ -11,7 +11,7 @@ class Unassigned extends Component {
     }
   
     render() {
-        const { unAssignedUser, doctors } = this.props.assignment
+        const { unAssignedUser, doctors } = this.props.assignment;
         return (
             <div className="content-wrapper">
                 <ContentHeader heading="Unassigned Users" subHeading="Users" />
@@ -20,8 +20,9 @@ class Unassigned extends Component {
         )
     }
 }
+
 const mapStateToProps = state => ({
     assignment: state.assignment
-})
+});
 
-export default connect(mapStateToProps, { getUnassignedUser, getDoctors })(Unassigned)
+export default connect(mapStateToProps, { getUnassignedUser, getDoctors })(Unassigned);

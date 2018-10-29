@@ -85,9 +85,7 @@ class UserList extends Component {
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                   {this.state.open && <QRModal open={this.state.open} userId={this.state.userId} closeModal={this.closeModal} />}

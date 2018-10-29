@@ -24,8 +24,9 @@ var QRCode = require('qrcode.react');
 
   render() {
      
-    const {userId} = this.props
-   
+    var userId= {userId:this.props.userId};
+    userId=JSON.stringify(userId);
+    console.log("userId",userId);
     return (
         <Modal open={this.props.open} onClose={this.onCloseModal} center>
              <QRCode value={userId} size="200" renderAs="svg" style={{margin:"50px"}}  />,

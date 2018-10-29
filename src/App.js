@@ -38,8 +38,7 @@ class App extends Component {
               <Route path="/admin/unassigned" component={Unassigned} />
               <Route path="/admin/assigned" component={Assigned} />
               <Route path="/admin/qrcode" component={UserList} />
-              <Route exact path="/admin" component={Content} />
-            
+              <Route exact path="/admin" component={Content} />            
             </Switch>   
           </Fragment>
         </Router>
