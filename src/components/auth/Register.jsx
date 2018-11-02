@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-// import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { combineValidators, isRequired } from 'revalidate';
 import TextFieldGroup from '../common/TextFieldGroup'
@@ -8,19 +6,15 @@ import TextFieldGroup from '../common/TextFieldGroup'
 const validate = combineValidators({
  username: isRequired({ message: 'Username is required' }),
  password: isRequired({ message: 'Password is required' }),
+ fullname: isRequired({ message: 'FullName is required' }),
 })
 
-class Login extends Component {
-  // state = {
-  //   username: '',
-  //   password: ''
-  // }
+class Register extends Component {
 
   onSubmit = () => {
     console.log('submitted')
   }
   render() {
-    // const { username, password } = this.state
     const { invalid, submitting, pristine } = this.props;
     return (
       <div className="login">
@@ -38,14 +32,16 @@ class Login extends Component {
                <Field
                  component={TextFieldGroup}
                  name="password"
-                 placeholder="Enter your password"
-                 type="password"              
+                 type="password"
+                 placeholder="Enter your password"                          
                />
-              <button type="submit" className="btn btn-lg btn-primary btn-block btn-signin" disabled={invalid || submitting || pristine}>Log in</button>
+               <Field
+                 component={TextFieldGroup}
+                 name="fullname"
+                 placeholder="Enter your fullname"             
+               />
+              <button type="submit" className="btn btn-lg btn-primary btn-block btn-signin" disabled={invalid || submitting || pristine}>Register</button>
             </form>
-             <div className="signup-link">
-               <p>Don't have an account! <Link to="/admin/register">Sign Up Here</Link></p>
-             </div>
           </div>
         </div>
       </div>
@@ -54,4 +50,4 @@ class Login extends Component {
   }
 }
 
-export default reduxForm({ form: "loginForm", validate })(Login);
+export default reduxForm({ form: "registerForm", validate })(Register);

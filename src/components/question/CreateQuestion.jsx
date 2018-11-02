@@ -16,6 +16,9 @@ const validate = combineValidators({
 
 class CreateQuestion extends Component {
     state = {
+        // qname: '',
+        // qlabel: '',
+        // inputOptions: '',
         formType: '',
         showOptions: false,
     }
@@ -74,7 +77,7 @@ class CreateQuestion extends Component {
     render() {
         const { invalid, submitting, pristine } = this.props;
 
-        const { qname, qlabel, formType, showOptions, inputOptions } = this.state
+        const { formType, showOptions } = this.state
         const options = [
             { label: "* Select Form Type", value: "* Select Form Type" },
             { label: "text", value: "text" },
@@ -106,14 +109,14 @@ class CreateQuestion extends Component {
                                             label="Question Name"
                                             name="qname"
                                             placeholder="Enter name for questions"
-                                            value={qname}
+                                            // value={qname}
                                         />
                                         <Field
                                             component={TextFieldGroup}
                                             label="Question Label"
                                             name="qlabel"
                                             placeholder="Enter label of question"
-                                            value={qlabel}
+                                            // value={qlabel}
                                         />
                                         <div className="form-group">
                                             <label htmlFor="formType">Form Type</label>
@@ -132,7 +135,7 @@ class CreateQuestion extends Component {
                                             label="Options"
                                             name="inputOptions"
                                             placeholder="Enter options for question"
-                                            value={inputOptions}
+                                            // value={inputOptions}
                                             info="For now please enter options field as : female; male; nogender"
                                         />
                                         }

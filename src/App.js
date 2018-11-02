@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { Provider } from 'react-redux'
 import ReduxToastr from 'react-redux-toastr';
 
 import store from './store';
 
-import Header from './components/layout/Header';
-import SideBar from './components/layout/SideBar';
-import Content from './components/question/Content';
+import MainAdminLayout from './components/layout/MainAdminLayout'
+import MainLayout from './components/layout/MainLayout'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Content from './components/question/Content'
 import CreateQset from './components/question/CreateQset'
-import QuestionsType from "./components/question/QuestionsType";
+import QuestionsType from "./components/question/QuestionsType"
 import QuestionsList from './components/question/QuestionsList'
 import CreateQuestion from './components/question/CreateQuestion'
 import EditQuestion from './components/question/EditQuestion'
@@ -27,19 +29,19 @@ class App extends Component {
         <Router>
           <Fragment>
             <ReduxToastr preventDuplicates position='bottom-right' transitionIn='fadeIn' transitionOut='fadeOut' />
-            <Header />
-            <SideBar />
-            <Switch>
-              <Route path="/admin/create-qset" component={CreateQset} />
-              <Route path="/admin/question-type" component={QuestionsType} />
-              <Route path="/admin/qset/:type" component={QuestionsList} />
-              <Route path="/admin/create-question/:type/:category" component={CreateQuestion} />
-              <Route path="/admin/edit-question/:type/:category/:id" component={EditQuestion} />
-              <Route path="/admin/unassigned" component={Unassigned} />
-              <Route path="/admin/assigned" component={Assigned} />
-              <Route path="/admin/qrcode" component={UserList} />
-              <Route exact path="/admin" component={Content} />            
-            </Switch>   
+              <Switch>
+                <MainAdminLayout path="/admin/create-qset" component={CreateQset} />
+                <MainAdminLayout path="/admin/question-type" component={QuestionsType} />
+                <MainAdminLayout path="/admin/qset/:type" component={QuestionsList} />
+                <MainAdminLayout path="/admin/create-question/:type/:category" component={CreateQuestion} />
+                <MainAdminLayout path="/admin/edit-question/:type/:category/:id" component={EditQuestion} />
+                <MainAdminLayout path="/admin/unassigned" component={Unassigned} />
+                <MainAdminLayout path="/admin/assigned" component={Assigned} />
+                <MainAdminLayout path="/admin/qrcode" component={UserList} />
+                <MainLayout path="/admin/login" component={Login} />
+                <MainLayout path="/admin/register" component={Register} />
+                <MainAdminLayout exact path="/admin" component={Content} />            
+              </Switch>
           </Fragment>
         </Router>
       </Provider>

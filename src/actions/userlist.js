@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { toastr } from "react-redux-toastr";
+// import { toastr } from "react-redux-toastr";
 import { GET_ERROR, GET_ALL_USERS} from './types'
 import { url } from '../config'
 

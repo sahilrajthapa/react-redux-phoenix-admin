@@ -11,13 +11,14 @@ const TextFieldGroup = ({
 }) => {
   return (
     <div className="form-group">
-       <label htmlFor={input.name}>{label}</label>
+       {label && <label htmlFor={input.name}>{label}</label> }
        { info && <p className="text-sm text-muted">{info}</p>}
       <input
         {...input}
         type={type}
         className="form-control"
-        placeholder={placeholder}    
+        placeholder={placeholder}  
+        onBlur={(e) => {console.log('I blurred!'); input.onBlur(e)}}  
       />
       {touched && error && <p className="text-sm text-danger">{error}</p>}
     </div>
@@ -27,7 +28,7 @@ const TextFieldGroup = ({
 TextFieldGroup.propTypes =  {
      input: PropTypes.object.isRequired,
      placeholder: PropTypes.string,
-     label: PropTypes.string.isRequired,
+     label: PropTypes.string,
      type: PropTypes.string.isRequired,
      info: PropTypes.string,
 }
