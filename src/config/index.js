@@ -9,5 +9,6 @@ export const url =  {
     question: (devEnv) ? `${devHost}/question` :`${host}/question`, 
     assignment: (devEnv) ? `${devHost}/assignment` : `${host}/assignment`,
     doctor: (devEnv) ? `${devHost}/doctor` :`${host}/assignment`,    
-    user: (devEnv) ? `${devHost}/userlist`:`${host}/userlist`
+    user: (devEnv) ? `${devHost}/userlist`:`${host}/userlist`,
+    mtechAuth: (devEnv) ? `${devHost}/mtech/auth`: `${host}/mtech/auth`
 }

@@ -1,13 +1,10 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Header from './Header'
 import SideBar from './SideBar';
 
-const auth = {
-    isAuthenticated: true
-}
-
-const MainAdminLayout = ({ component: Component, ...rest }) => {
+const MainAdminLayout = ({ auth, component: Component, ...rest }) => {
     return (
         <Route {...rest} render={matchProps => {
             return auth.isAuthenticated === true ?
@@ -24,4 +21,7 @@ const MainAdminLayout = ({ component: Component, ...rest }) => {
     )
 };
 
-export default MainAdminLayout
+const mapStateToProps = (state) =>({
+    auth: state.auth
+})
+export default connect(mapStateToProps, null)(MainAdminLayout)

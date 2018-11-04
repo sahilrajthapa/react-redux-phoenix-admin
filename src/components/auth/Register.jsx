@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { combineValidators, isRequired } from 'revalidate';
+import { combineValidators, isRequired } from 'revalidate'
 import TextFieldGroup from '../common/TextFieldGroup'
+import { registerUser } from '../../actions/authActions'
 
 const validate = combineValidators({
  username: isRequired({ message: 'Username is required' }),
@@ -11,8 +14,15 @@ const validate = combineValidators({
 
 class Register extends Component {
 
-  onSubmit = () => {
-    console.log('submitted')
+  onSubmit = (values) => {
+      console.log('submitted')
+     const newUser = {
+        username: values.username,
+        password: values.password,
+        fullName: values.fullName
+     }
+
+     this.props.registerUser(newUser, this.props.history);
   }
   render() {
     const { invalid, submitting, pristine } = this.props;
@@ -37,7 +47,7 @@ class Register extends Component {
                />
                <Field
                  component={TextFieldGroup}
-                 name="fullname"
+                 name="fullName"
                  placeholder="Enter your fullname"             
                />
               <button type="submit" className="btn btn-lg btn-primary btn-block btn-signin" disabled={invalid || submitting || pristine}>Register</button>
@@ -50,4 +60,4 @@ class Register extends Component {
   }
 }
 
-export default reduxForm({ form: "registerForm", validate })(Register);
+export default connect(null, { registerUser })(reduxForm({ form: "registerForm", validate })(withRouter(Register)));

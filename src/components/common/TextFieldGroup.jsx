@@ -18,7 +18,6 @@ const TextFieldGroup = ({
         type={type}
         className="form-control"
         placeholder={placeholder}  
-        onBlur={(e) => {console.log('I blurred!'); input.onBlur(e)}}  
       />
       {touched && error && <p className="text-sm text-danger">{error}</p>}
     </div>

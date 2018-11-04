@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { combineValidators, isRequired} from 'revalidate';
 import { addIntroQuestion, addCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ChipInputGroup from '../common/ChipInputGroup'
 import ContentHeader from '../common/ContentHeader'
 
 
@@ -130,12 +131,19 @@ class CreateQuestion extends Component {
                                             </select>
                                         </div>
                                         {showOptions && 
+                                        // <Field
+                                        //     component={TextFieldGroup}
+                                        //     label="Options"
+                                        //     name="inputOptions"
+                                        //     placeholder="Enter options for question"
+                                        //     info="For now please enter options field as : female; male; nogender"
+                                        // />
+
                                         <Field
-                                            component={TextFieldGroup}
+                                            component={ChipInputGroup}
                                             label="Options"
                                             name="inputOptions"
                                             placeholder="Enter options for question"
-                                            // value={inputOptions}
                                             info="For now please enter options field as : female; male; nogender"
                                         />
                                         }

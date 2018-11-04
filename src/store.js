@@ -4,8 +4,8 @@ import rootReducer from "./reducers";
 import {loadState, saveState} from './localStorage'
 
 
-const persistedState = loadState();
-
+// const persistedState = loadState();
+const persistedState = {}
 // const initialState = {};
 
 const middleware = [thunk];

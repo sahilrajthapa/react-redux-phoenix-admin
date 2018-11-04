@@ -5,6 +5,7 @@ import questionReducer from './questionReducer'
 import errorReducer from './errorReducer'
 import assignmentReducer from './assignmentReducer'
 import userReducer from './userReducer'
+import  authReducer from './authReducer'
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     toastr: toastrReducer,
     form: formReducer,
     assignment: assignmentReducer,
-    userList:userReducer
+    userList:userReducer,
+    auth: authReducer
 })
