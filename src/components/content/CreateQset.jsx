@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import  { connect } from 'react-redux';
+import { addQuestionType } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
 
 class CreateForm extends Component {
   state = {
     type: '',
     dueDate: '',
-    introQuestions: [],
-    questions: [],
-    displayIntroQuestion: false
   }
   onChange = (e) => {
     this.setState({
@@ -16,6 +15,16 @@ class CreateForm extends Component {
     })
   }
 
+  onSubmit = (e) => {
+    e.preventDefault()
+    const questData = {
+           ...this.state,
+           introQuestions: [],
+           coreQuestions: [],
+    }
+    this.props.addQuestionType(questData,this.props.history)
+
+  }
   render() {
     return (
       <div className="content-wrapper">
@@ -36,7 +45,7 @@ class CreateForm extends Component {
                 <div className="box-header with-border">
                   <h3 className="box-title">Question Set Form</h3>
                 </div>
-                <form >
+                <form onSubmit={this.onSubmit}>
                   <div className="box-body">
                     <TextFieldGroup
                       label="Type"
@@ -55,7 +64,7 @@ class CreateForm extends Component {
                     />
                   </div>
                   <div className="box-footer">
-                    <button type="submit" className="btn btn-primary" onSubmit="onSubmit">Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                   </div>
                 </form>
               </div>
@@ -67,4 +76,4 @@ class CreateForm extends Component {
   }
 }
 
-export default CreateForm
+export default connect(null,{ addQuestionType })(withRouter(CreateForm))

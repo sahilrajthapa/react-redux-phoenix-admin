@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { deleteIntroQuestion, deleteCoreQuestion } from '../../actions/questionActions'
 
 class List extends Component {
+    onDelete = (qcategory, parentId, questId) => {
+      if (qcategory === 'IntroQuestion') {
+          this.props.deleteIntroQuestion(parentId, questId)
+      } else {
+        this.props.deleteCoreQuestion(parentId, questId)
+      }
+      
+    }
     render() {
-        let { question, qcategory, qtype } = this.props
+        let { question, qcategory, qtype , parentId} = this.props
 
         if (question) {
-            console.log('question', question)
             var list = question.map((quest, index) => {
                 let options
                 if (quest.options) {
                     options = quest.options.map(opt => {
                         return (
-                            <li>{opt.label}</li>
+                            <li key={opt._id}>{opt.label}</li>
                         )
                     })
                 } else {
@@ -20,7 +29,7 @@ class List extends Component {
                 }
 
                 return (
-                    <tr>
+                    <tr key={quest._id}>
                         <td>{index + 1}</td>
                         <td>{quest.name}</td>
                         <td>{quest.label}</td>
@@ -28,8 +37,8 @@ class List extends Component {
                         <td>
                             <ul>{options}</ul>
                         </td>
-                        <td><span className="btn btn-primary">Update</span></td>
-                        <td><span className="btn btn-danger">Delete</span></td>
+                        <td><Link to={`/edit-question/${qtype}/${qcategory}/${quest._id}`} className="btn btn-primary">Update</Link></td>
+                        <td><button className="btn btn-danger" onClick={() => this.onDelete(qcategory, parentId, quest._id)}>Delete</button></td>
                     </tr>
 
                 )
@@ -79,4 +88,4 @@ class List extends Component {
     }
 }
 
-export default List
+export default connect(null, { deleteIntroQuestion, deleteCoreQuestion })(withRouter(List))

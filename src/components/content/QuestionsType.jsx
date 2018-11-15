@@ -1,31 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { getQuestionType } from '../../actions/questionActions'
+import Moment from 'react-moment'
 
 class QuestionsType extends Component {
-    state = {
-        question: []
-    }
+
     componentDidMount() {
-        axios.get('/data.json')
-            .then(res => {
-                this.setState({
-                question: res.data
-                }, () => console.log(this.state.question))
-        })
-            .catch(err => console.log(err))
+        this.props.getQuestionType()
     }
 
     render() {
-        let { question } = this.state
-        let questionType
-        if (question.length > 0) {
-            questionType = question.map((qtype, index) => {
+        let { questionType } = this.props.question;
+        let questType;
+        if (questionType.length > 0) {
+            questType = questionType.map((qtype, index) => {
                return (
                     <tr key={qtype.type}>
                         <td>{index + 1}</td>
                         <td><Link to={`/qset/${qtype.type}`}>{qtype.type}</Link></td>
-                        <td><Link to={`/qset/${qtype.type}`}>{qtype.dueDate}</Link></td>
+                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.createdAt}</Moment></Link></td>
+                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.dueDate}</Moment></Link></td>
                     </tr >
                 )
             })
@@ -34,12 +29,12 @@ class QuestionsType extends Component {
             <div className="content-wrapper" >
                 <section className="content-header">
                     <h1>
-                        Questions Type
+                        Questions Set
                     </h1>
                     <ol className="breadcrumb">
                         <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
                         <li><Link to="#">Questions</Link></li>
-                        <li className="active">Questions Type</li>
+                        <li className="active">Questions Set</li>
                     </ol>
                 </section>
                 <section className="content">
@@ -47,16 +42,17 @@ class QuestionsType extends Component {
                         <div className="col-md-12">
                             <div className="box">
                                 <div className="box-header with-border">
-                                    <h3 className="box-title">Questions Type Table</h3>
+                                    <h3 className="box-title">Questions Set Table</h3>
                                 </div>
                                 <div className="box-body">
                                     <table className="table table-bordered">
                                         <tbody><tr>
                                             <th style={{ width: "10px" }}>#</th>
-                                            <th>Type</th>
+                                            <th>Set</th>
+                                            <th>Created At</th>
                                             <th>DueDate</th>
                                         </tr>
-                                            {questionType}
+                                            {questType}
                                             
                                         </tbody></table>
                                 </div>
@@ -80,4 +76,8 @@ class QuestionsType extends Component {
     }
 }
 
-export default QuestionsType;
+const mapStateToProps = state => ({
+    question: state.question
+})
+
+export default connect(mapStateToProps, {getQuestionType})(QuestionsType);

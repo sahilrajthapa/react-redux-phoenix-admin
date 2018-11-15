@@ -6,8 +6,8 @@ class Header extends Component {
         return (
             <header className="main-header">
                 <Link to="/" className="logo">
-                    <span className="logo-mini"><b>A</b>LT</span>
-                    <span className="logo-lg"><b>Admin</b>LTE</span>
+                    <span className="logo-mini"><b>P</b>AP</span>
+                    <span className="logo-lg"><b>Phoenix</b>AP</span>
                 </Link>
                 <nav className="navbar navbar-static-top">
                     <Link to="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -27,7 +27,7 @@ class Header extends Component {
                                             <li>
                                                 <Link to="#">
                                                     <div className="pull-left">
-                                                        <img src="img/user2-160x160.jpg" className="img-circle" alt="User" />
+                                                        <img src="/img/user2-160x160.jpg" className="img-circle" alt="User" />
                                                     </div>
                                                     <h4>
                                                         Support Team

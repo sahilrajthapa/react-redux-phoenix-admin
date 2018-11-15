@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addIntroQuestion, addCoreQuestion, getQuestions } from '../../actions/questionActions'
+import { updateIntroQuestion, updateCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
 
-class CreateQuestion extends Component {
+class EditQuestion extends Component {
     state = {
         qname: '',
         qlabel: '',
@@ -12,6 +12,7 @@ class CreateQuestion extends Component {
         inputOptions: '',
         showOptions: false,
     }
+
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -35,49 +36,102 @@ class CreateQuestion extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         let { question } = this.props.question
-        let { type, category } = this.props.match.params
-        let  filterOpt = [];
-        
-        if(this.state.inputOptions.trim().length > 0){
-           filterOpt = this.state.inputOptions.split(';').map((opt) => {
-                return {
-                    label: opt
-                }
-           })
+        let { type, id, category } = this.props.match.params
+        let Options = [];
+        let filterQuest;
+
+        if (this.state.inputOptions.trim().length > 0) {
+            if (category === 'IntroQuestion') {
+                filterQuest = question.introQuestions.filter(q => q._id === id)[0].options
+            } else {
+                filterQuest = question.coreQuestions.filter(q => q._id === id)[0].options
+            }
+
+
+            console.log('filterOpt', filterQuest)
+            Options = this.state.inputOptions.split(';').map((opt) => {
+                  let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
+                  console.log('filterOpt', filterOpt)
+                   if(!filterOpt) {
+                     return { 
+                         label: opt
+                        }
+                   }
+                    return {
+                        label: opt,
+                        _id: filterOpt._id 
+                       
+                    }
+
+               
+            })
         }
 
-        if (category === 'IntroQuestion') {
+        console.log('Options', Options)
 
+        if (category === 'IntroQuestion') {
             let introData = {
+                _id: id,
                 name: this.state.qname,
                 label: this.state.qlabel,
                 formType: this.state.formType,
-                options: filterOpt
+                options: Options
             }
-            this.props.addIntroQuestion(question._id, type, introData, this.props.history)
+            console.log('introdata', introData)
+            // question._id === parentId
+            // id === introId
+            this.props.updateIntroQuestion(question._id, id, type, introData, this.props.history)
         } else {
-
-        let coreData = {
-            name: this.state.qname,
-            label: this.state.qlabel,
-            formType: this.state.formType,
-            options: filterOpt
+            let coreData = {
+                _id: id,
+                name: this.state.qname,
+                label: this.state.qlabel,
+                formType: this.state.formType,
+                options: Options
+            }
+            this.props.updateCoreQuestion(question._id, id, type, coreData, this.props.history)
         }
-
-        console.log("Coredata",coreData)
-        this.props.addCoreQuestion(question._id, type, coreData, this.props.history)
-        }
- 
-
-       
-
 
     }
 
     componentDidMount() {
-    
-            this.props.getQuestions(this.props.match.params.type)
-       
+        this.props.getQuestions(this.props.match.params.type)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let editQuest;
+        let { category, id } = nextProps.match.params;
+        let { question } = nextProps.question
+        if (Object.keys(question).length > 0) {
+
+            if (category === 'IntroQuestion') {
+                editQuest = question.introQuestions.filter(q => q._id === id)[0]
+            } else {
+                editQuest = question.coreQuestions.filter(q => q._id === id)[0]
+            }
+            if (editQuest.options.length > 0) {
+                console.log('editprofile', editQuest.options)
+                let opt = editQuest.options.map((opt => {
+                    return opt.label
+                })).join(';')
+                console.log('typeof opt',typeof opt)
+                this.setState({
+                    qname: editQuest.name,
+                    qlabel: editQuest.label,
+                    formType: editQuest.formType,
+                    inputOptions: opt,
+                    showOptions: true,
+                })
+            } else {
+                this.setState({
+                    ...this.state,
+                    qname: editQuest.name,
+                    qlabel: editQuest.label,
+                    formType: editQuest.formType,
+                })
+            }
+
+        }
     }
 
     render() {
@@ -141,15 +195,15 @@ class CreateQuestion extends Component {
                                                 {selectOptions}
                                             </select>
                                         </div>
-                                        {showOptions && 
-                                        <TextFieldGroup
-                                            label="Options"
-                                            name="inputOptions"
-                                            placeholder="Enter options for question"
-                                            value={inputOptions}
-                                            onChange={this.onChange}
-                                            info="For now please enter options field as : female; male; nogender"
-                                        />
+                                        {showOptions &&
+                                            <TextFieldGroup
+                                                label="Options"
+                                                name="inputOptions"
+                                                placeholder="Enter options for question"
+                                                value={inputOptions}
+                                                onChange={this.onChange}
+                                                info="For now please enter options field as : female; male; nogender"
+                                            />
                                         }
                                     </div>
                                     <div className="box-footer">
@@ -170,4 +224,4 @@ const mapStateToProps = state => ({
     question: state.question
 })
 
-export default connect(mapStateToProps, { addIntroQuestion, addCoreQuestion, getQuestions })(withRouter(CreateQuestion));
+export default connect(mapStateToProps, { updateIntroQuestion, updateCoreQuestion, getQuestions })(withRouter(EditQuestion));
