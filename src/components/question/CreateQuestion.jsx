@@ -1,22 +1,29 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import { combineValidators, isRequired} from 'revalidate';
 import { addIntroQuestion, addCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ChipInputGroup from '../common/ChipInputGroup'
+import ContentHeader from '../common/ContentHeader'
+
+
+const validate = combineValidators({
+    qlabel: isRequired({ message: 'Question label is required'}),
+    qname: isRequired({message: 'Question name is required'}),
+    inputOptions: isRequired({message: 'Options are required'})
+ })
 
 class CreateQuestion extends Component {
     state = {
-        qname: '',
-        qlabel: '',
+        // qname: '',
+        // qlabel: '',
+        // inputOptions: '',
         formType: '',
-        inputOptions: '',
         showOptions: false,
     }
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+
     onFormTypeChange = (e) => {
         if (e.target.value === 'checkbox' || e.target.value === 'radio') {
             this.setState({
@@ -29,16 +36,14 @@ class CreateQuestion extends Component {
                 showOptions: false
             })
         }
-
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
+    onSubmit = (values) => {
         let { question } = this.props.question
         let { type, category } = this.props.match.params
         let  filterOpt = [];
         
-        if(this.state.inputOptions.trim().length > 0){
+        if(values.inputOptions && values.inputOptions.trim().length > 0){
            filterOpt = this.state.inputOptions.split(';').map((opt) => {
                 return {
                     label: opt
@@ -47,10 +52,9 @@ class CreateQuestion extends Component {
         }
 
         if (category === 'IntroQuestion') {
-
             let introData = {
-                name: this.state.qname,
-                label: this.state.qlabel,
+                name: values.qname,
+                label: values.qlabel,
                 formType: this.state.formType,
                 options: filterOpt
             }
@@ -58,30 +62,23 @@ class CreateQuestion extends Component {
         } else {
 
         let coreData = {
-            name: this.state.qname,
-            label: this.state.qlabel,
+            name: values.qname,
+            label: values.qlabel,
             formType: this.state.formType,
             options: filterOpt
         }
-
-        console.log("Coredata",coreData)
         this.props.addCoreQuestion(question._id, type, coreData, this.props.history)
         }
- 
-
-       
-
-
     }
 
     componentDidMount() {
-    
-            this.props.getQuestions(this.props.match.params.type)
-       
+     this.props.getQuestions(this.props.match.params.type)     
     }
 
     render() {
-        let { qname, qlabel, formType, showOptions, inputOptions } = this.state
+        const { invalid, submitting, pristine } = this.props;
+
+        const { formType, showOptions } = this.state
         const options = [
             { label: "* Select Form Type", value: "* Select Form Type" },
             { label: "text", value: "text" },
@@ -95,18 +92,10 @@ class CreateQuestion extends Component {
                 {option.value}
             </option>
         ));
-        return (
+
+        return (        
             <div className="content-wrapper">
-                <div className="content-header">
-                    <h1>
-                        Create questions
-              </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Create Question</li>
-                    </ol>
-                </div>
+                <ContentHeader heading="Create Question" subHeading="Questions"/>
                 <div className="content">
                     <div className="row">
                         <div className="col-md-6">
@@ -114,21 +103,21 @@ class CreateQuestion extends Component {
                                 <div className="box-header with-border">
                                     <h3 className="box-title">Question Form</h3>
                                 </div>
-                                <form onSubmit={this.onSubmit}>
+                                <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <div className="box-body">
-                                        <TextFieldGroup
+                                      <Field
+                                            component={TextFieldGroup}
                                             label="Question Name"
                                             name="qname"
                                             placeholder="Enter name for questions"
-                                            value={qname}
-                                            onChange={this.onChange}
+                                            // value={qname}
                                         />
-                                        <TextFieldGroup
+                                        <Field
+                                            component={TextFieldGroup}
                                             label="Question Label"
                                             name="qlabel"
                                             placeholder="Enter label of question"
-                                            value={qlabel}
-                                            onChange={this.onChange}
+                                            // value={qlabel}
                                         />
                                         <div className="form-group">
                                             <label htmlFor="formType">Form Type</label>
@@ -142,25 +131,31 @@ class CreateQuestion extends Component {
                                             </select>
                                         </div>
                                         {showOptions && 
-                                        <TextFieldGroup
+                                        // <Field
+                                        //     component={TextFieldGroup}
+                                        //     label="Options"
+                                        //     name="inputOptions"
+                                        //     placeholder="Enter options for question"
+                                        //     info="For now please enter options field as : female; male; nogender"
+                                        // />
+
+                                        <Field
+                                            component={ChipInputGroup}
                                             label="Options"
                                             name="inputOptions"
                                             placeholder="Enter options for question"
-                                            value={inputOptions}
-                                            onChange={this.onChange}
                                             info="For now please enter options field as : female; male; nogender"
                                         />
                                         }
                                     </div>
                                     <div className="box-footer">
-                                        <button type="submit" className="btn btn-primary" >Submit</button>
+                                        <button type="submit" className="btn btn-primary" disabled={invalid || submitting || pristine}>Submit</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
@@ -170,4 +165,6 @@ const mapStateToProps = state => ({
     question: state.question
 })
 
-export default connect(mapStateToProps, { addIntroQuestion, addCoreQuestion, getQuestions })(withRouter(CreateQuestion));
+export default connect(mapStateToProps, { addIntroQuestion, addCoreQuestion, getQuestions })(withRouter(reduxForm({ form: "createQuestionForm", validate })(CreateQuestion)));
+
+

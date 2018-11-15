@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import { combineValidators, isRequired } from 'revalidate';
 import { updateIntroQuestion, updateCoreQuestion, getQuestions } from '../../actions/questionActions'
 import TextFieldGroup from '../common/TextFieldGroup'
+import ContentHeader from '../common/ContentHeader'
+
+const validate = combineValidators({
+    qlabel: isRequired({ message: 'Question label is required' }),
+    qname: isRequired({ message: 'Question name is required' }),
+    inputOptions: isRequired({ message: 'Options are required' })
+})
+
 
 class EditQuestion extends Component {
     state = {
-        qname: '',
-        qlabel: '',
-        formType: '',
-        inputOptions: '',
-        showOptions: false,
+        formType: this.props.initialValues.formType || '',
+        showOptions: this.props.initialValues.inputOptions ? true : false
     }
 
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
     onFormTypeChange = (e) => {
         if (e.target.value === 'checkbox' || e.target.value === 'radio') {
             this.setState({
@@ -30,7 +32,6 @@ class EditQuestion extends Component {
                 showOptions: false
             })
         }
-
     }
 
     onSubmit = (e) => {
@@ -46,96 +47,39 @@ class EditQuestion extends Component {
             } else {
                 filterQuest = question.coreQuestions.filter(q => q._id === id)[0].options
             }
-
-
-            console.log('filterOpt', filterQuest)
             Options = this.state.inputOptions.split(';').map((opt) => {
-                  let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
-                  console.log('filterOpt', filterOpt)
-                   if(!filterOpt) {
-                     return { 
-                         label: opt
-                        }
-                   }
+                let filterOpt = filterQuest.filter(optItem => optItem.label === opt)[0]
+                if (!filterOpt) {
                     return {
-                        label: opt,
-                        _id: filterOpt._id 
-                       
+                        label: opt
                     }
-
-               
+                }
+                return {
+                    label: opt,
+                    _id: filterOpt._id
+                }
             })
         }
 
-        console.log('Options', Options)
-
+        let questData = {
+            _id: id,
+            name: this.state.qname,
+            label: this.state.qlabel,
+            formType: this.state.formType,
+            options: Options
+        }
         if (category === 'IntroQuestion') {
-            let introData = {
-                _id: id,
-                name: this.state.qname,
-                label: this.state.qlabel,
-                formType: this.state.formType,
-                options: Options
-            }
-            console.log('introdata', introData)
-            // question._id === parentId
-            // id === introId
-            this.props.updateIntroQuestion(question._id, id, type, introData, this.props.history)
+            this.props.updateIntroQuestion(question._id, id, type, questData, this.props.history)
         } else {
-            let coreData = {
-                _id: id,
-                name: this.state.qname,
-                label: this.state.qlabel,
-                formType: this.state.formType,
-                options: Options
-            }
-            this.props.updateCoreQuestion(question._id, id, type, coreData, this.props.history)
+            this.props.updateCoreQuestion(question._id, id, type, questData, this.props.history)
         }
 
     }
 
-    componentDidMount() {
-        this.props.getQuestions(this.props.match.params.type)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        let editQuest;
-        let { category, id } = nextProps.match.params;
-        let { question } = nextProps.question
-        if (Object.keys(question).length > 0) {
-
-            if (category === 'IntroQuestion') {
-                editQuest = question.introQuestions.filter(q => q._id === id)[0]
-            } else {
-                editQuest = question.coreQuestions.filter(q => q._id === id)[0]
-            }
-            if (editQuest.options.length > 0) {
-                console.log('editprofile', editQuest.options)
-                let opt = editQuest.options.map((opt => {
-                    return opt.label
-                })).join(';')
-                console.log('typeof opt',typeof opt)
-                this.setState({
-                    qname: editQuest.name,
-                    qlabel: editQuest.label,
-                    formType: editQuest.formType,
-                    inputOptions: opt,
-                    showOptions: true,
-                })
-            } else {
-                this.setState({
-                    ...this.state,
-                    qname: editQuest.name,
-                    qlabel: editQuest.label,
-                    formType: editQuest.formType,
-                })
-            }
-
-        }
-    }
 
     render() {
-        let { qname, qlabel, formType, showOptions, inputOptions } = this.state
+        const { invalid, submitting, pristine } = this.props;
+        const { formType, showOptions } = this.state
         const options = [
             { label: "* Select Form Type", value: "* Select Form Type" },
             { label: "text", value: "text" },
@@ -149,18 +93,11 @@ class EditQuestion extends Component {
                 {option.value}
             </option>
         ));
+
+        console.log(this.props)
         return (
             <div className="content-wrapper">
-                <div className="content-header">
-                    <h1>
-                        Create questions
-              </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Create Question</li>
-                    </ol>
-                </div>
+                <ContentHeader heading="Edit Question" subHeading="Questions" />
                 <div className="content">
                     <div className="row">
                         <div className="col-md-6">
@@ -170,19 +107,17 @@ class EditQuestion extends Component {
                                 </div>
                                 <form onSubmit={this.onSubmit}>
                                     <div className="box-body">
-                                        <TextFieldGroup
+                                        <Field
+                                            component={TextFieldGroup}
                                             label="Question Name"
                                             name="qname"
                                             placeholder="Enter name for questions"
-                                            value={qname}
-                                            onChange={this.onChange}
                                         />
-                                        <TextFieldGroup
+                                        <Field
+                                            component={TextFieldGroup}
                                             label="Question Label"
                                             name="qlabel"
                                             placeholder="Enter label of question"
-                                            value={qlabel}
-                                            onChange={this.onChange}
                                         />
                                         <div className="form-group">
                                             <label htmlFor="formType">Form Type</label>
@@ -196,18 +131,18 @@ class EditQuestion extends Component {
                                             </select>
                                         </div>
                                         {showOptions &&
-                                            <TextFieldGroup
+                                            <Field
+                                                component={TextFieldGroup}
                                                 label="Options"
                                                 name="inputOptions"
                                                 placeholder="Enter options for question"
-                                                value={inputOptions}
-                                                onChange={this.onChange}
                                                 info="For now please enter options field as : female; male; nogender"
                                             />
                                         }
                                     </div>
                                     <div className="box-footer">
-                                        <button type="submit" className="btn btn-primary" >Submit</button>
+                                        <button type="submit" className="btn btn-primary" disabled={invalid
+                                            || submitting || pristine}>Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -220,8 +155,33 @@ class EditQuestion extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    question: state.question
-})
+const mapStateToProps = (state, ownProps) => {
+    const questionId = ownProps.match.params.id;
+    let editQuest = {};
+    let opt;
+    if (questionId && Object.keys(state.question.question).length > 0) {
+        if (ownProps.match.params.category === 'IntroQuestion') {
+            editQuest = state.question.question.introQuestions.filter(q => q._id === ownProps.match.params.id)[0]
+        } else {
+            editQuest = state.question.question.coreQuestions.filter(q => q._id === ownProps.match.params.id)[0]
+        }
+        if (editQuest.options.length > 0) {
+            opt = editQuest.options.map((opt => {
+                return opt.label
+            })).join(';')
 
-export default connect(mapStateToProps, { updateIntroQuestion, updateCoreQuestion, getQuestions })(withRouter(EditQuestion));
+        }
+    }
+    let newQuest = {
+        qname: editQuest.name,
+        qlabel: editQuest.label,
+        formType: editQuest.formType,
+        inputOptions: opt
+    }
+    return {
+        initialValues: newQuest,
+        question: state.question
+    };
+};
+
+export default connect(mapStateToProps, { updateIntroQuestion, updateCoreQuestion, getQuestions })(withRouter(reduxForm({ form: "editQuestionForm", enableReinitialize: true, validate })(EditQuestion)));

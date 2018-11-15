@@ -196,7 +196,7 @@ a:focus {
 .main-header {
   position: relative;
   max-height: 100px;
-  z-index: 1030;
+  z-index: 999;
 }
 .main-header .navbar {
   -webkit-transition: margin-left 0.3s ease-in-out;
@@ -3488,6 +3488,9 @@ table.text-center th {
  * Page: Profile
  * -------------
  */
+ .profile-user-img-sm {
+  width: 40px;
+}
 .profile-user-img {
   margin: 0 auto;
   width: 100px;
@@ -5669,5 +5672,12 @@ table.text-center th {
   .table-responsive > .table tr th,
   .table-responsive > .table tr td {
     white-space: normal !important;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .pull-right .custom-input {
+     margin: 10px 0
   }
 }

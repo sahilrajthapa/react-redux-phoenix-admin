@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getQuestionType } from '../../actions/questionActions'
 import Moment from 'react-moment'
+import { getQuestionType, deleteQuestionType } from '../../actions/questionActions'
+import ContentHeader from '../common/ContentHeader'
 
 class QuestionsType extends Component {
-
+    onDelete = (id) => {
+       this.props.deleteQuestionType(id)
+    }
     componentDidMount() {
         this.props.getQuestionType()
     }
@@ -18,25 +21,18 @@ class QuestionsType extends Component {
                return (
                     <tr key={qtype.type}>
                         <td>{index + 1}</td>
-                        <td><Link to={`/qset/${qtype.type}`}>{qtype.type}</Link></td>
-                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.createdAt}</Moment></Link></td>
-                        <td><Link to={`/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.dueDate}</Moment></Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}>{qtype.type}</Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.createdAt}</Moment></Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`}><Moment format="YYYY/MM/DD">{qtype.dueDate}</Moment></Link></td>
+                        <td><Link to={`/admin/qset/${qtype.type}`} className="btn btn-block btn-info btn-xs">View</Link></td>
+                        <td><button type="button" className="btn btn-block btn-danger btn-xs" onClick={() => this.onDelete(qtype._id)}>Delete</button></td>
                     </tr >
                 )
             })
         }
         return (
             <div className="content-wrapper" >
-                <section className="content-header">
-                    <h1>
-                        Questions Set
-                    </h1>
-                    <ol className="breadcrumb">
-                        <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-                        <li><Link to="#">Questions</Link></li>
-                        <li className="active">Questions Set</li>
-                    </ol>
-                </section>
+                <ContentHeader heading="Questions Set" subHeading="Questions"/>
                 <section className="content">
                     <div className="row">
                         <div className="col-md-12">
@@ -51,6 +47,8 @@ class QuestionsType extends Component {
                                             <th>Set</th>
                                             <th>Created At</th>
                                             <th>DueDate</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                             {questType}
                                             
@@ -80,4 +78,4 @@ const mapStateToProps = state => ({
     question: state.question
 })
 
-export default connect(mapStateToProps, {getQuestionType})(QuestionsType);
+export default connect(mapStateToProps, {getQuestionType, deleteQuestionType})(QuestionsType);

@@ -26,7 +26,7 @@ class SideBar extends Component {
                     </form>
                     <ul className="sidebar-menu" data-widget="tree">
                         <li className="header">MAIN NAVIGATION</li>
-                        <li className="treeview active">
+                        <li className="treeview">
                             <Link to="#">
                                 <i className="fa fa-table"></i> <span>Questions</span>
                                 <span className="pull-right-container">
@@ -34,10 +34,11 @@ class SideBar extends Component {
                                 </span>
                             </Link>
                             <ul className="treeview-menu" style={{display: "none"}}>
-                                <li className="active"><Link to="/create-qset"><i className="fa fa-circle-o"></i> Create Question Set</Link></li>
-                                <li><Link to="/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
+                                <li className="active"><Link to="/admin/create-qset"><i className="fa fa-circle-o"></i> Create Question Set</Link></li>
+                                <li><Link to="/admin/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
+<<<<<<< HEAD
                         <li><Link to="/assignment"><i>Assignment</i></Link></li>
                         <li>
                         <Link to="#">
@@ -87,6 +88,25 @@ class SideBar extends Component {
                             <small className="label pull-right bg-red">5</small>
                             </span>
                         </Link>
+=======
+                        <li className="treeview">
+                            <Link to="#">
+                                <i className="fa fa-user"></i> <span>Users</span>
+                                <span className="pull-right-container">
+                                    <i className="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </Link>
+                            <ul className="treeview-menu" style={{display: "none"}}>
+                                <li className="active"><Link to="/admin/unassigned"><i className="fa fa-circle-o"></i> Unassigned Users</Link></li>
+                                <li><Link to="/admin/assigned"><i className="fa fa-circle-o"></i>Assigned Users</Link></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <Link to="/admin/qrcode">
+                                <i className="fa fa-qrcode"></i> <span>QR Codes</span>
+                            </Link>                
+                                   
+>>>>>>> e43728678074597af48a5c5818ae41203bfea30f
                         </li>
                     </ul>
                 </section>

@@ -2,38 +2,34 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TextFieldGroup = ({
-  name,
+  input,
   placeholder,
   label,
-  value,
   type,
-  onChange,
-  info
+  info,
+  meta: {touched, error}
 }) => {
   return (
     <div className="form-group">
-       <label htmlFor={name}>{label}</label>
+       {label && <label htmlFor={input.name}>{label}</label> }
        { info && <p className="text-sm text-muted">{info}</p>}
       <input
+        {...input}
         type={type}
         className="form-control"
-        placeholder={placeholder}
-        name={name}
-        value={value}
-        onChange={onChange}
+        placeholder={placeholder}  
       />
+      {touched && error && <p className="text-sm text-danger">{error}</p>}
     </div>
   );
 };
 
 TextFieldGroup.propTypes =  {
-     name: PropTypes.string.isRequired,
+     input: PropTypes.object.isRequired,
      placeholder: PropTypes.string,
-     value: PropTypes.string.isRequired,
-     label: PropTypes.string.isRequired,
+     label: PropTypes.string,
      type: PropTypes.string.isRequired,
      info: PropTypes.string,
-     onChange: PropTypes.func.isRequired,
 }
 
 TextFieldGroup.defaultProps = {

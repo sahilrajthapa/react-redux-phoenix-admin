@@ -5,17 +5,23 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
+    "qrcode.react": "^0.8.0",
     "react": "^16.5.2",
+    "react-chips": "^0.8.0",
     "react-dom": "^16.5.2",
     "react-modal": "^3.6.1",
     "react-moment": "^0.8.1",
     "react-redux": "^5.0.7",
     "react-redux-toastr": "^7.4.0",
+    "react-responsive-modal": "^3.4.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-form": "^7.4.2",
+    "redux-thunk": "^2.3.0",
+    "revalidate": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
