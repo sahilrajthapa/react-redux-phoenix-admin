@@ -38,6 +38,57 @@ class SideBar extends Component {
                                 <li><Link to="/admin/question-type"><i className="fa fa-circle-o"></i> Question Set List</Link></li>
                             </ul>
                         </li>
+<<<<<<< HEAD
+                        <li><Link to="/assignment"><i>Assignment</i></Link></li>
+                        <li>
+                        <Link to="#">
+                            <i className="fa fa-th"></i> <span>Widgets</span>
+                            <span className="pull-right-container">
+                            <small className="label pull-right bg-green">new</small>
+                            </span>
+                        </Link>
+                        </li>
+                        <li className="treeview">
+                        <Link to="#">
+                            <i className="fa fa-pie-chart"></i>
+                            <span>Charts</span>
+                            <span className="pull-right-container">
+                            <i className="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </Link>
+                        <ul className="treeview-menu">
+                            <li><Link to="/create-form"><i className="fa fa-circle-o"></i> Create Form</Link></li>
+                            
+                            <li><Link to="#"><i className="fa fa-circle-o"></i> Morris</Link></li>
+                            <li><Link to="#"><i className="fa fa-circle-o"></i> Flot</Link></li>
+                            <li><Link to="#"><i className="fa fa-circle-o"></i> Inline charts</Link></li>
+                        </ul>
+                        </li>
+                        <li>
+                        <ul className="treeview-menu">
+                            <li><Link to="#"><i className="fa fa-circle-o"></i> Simple tables</Link></li>
+                            <li><Link to="#"><i className="fa fa-circle-o"></i> Data tables</Link></li>
+                        </ul>
+                        </li>
+                        <li>
+                        <Link to="#">
+                            <i className="fa fa-calendar"></i> <span>Calendar</span>
+                            <span className="pull-right-container">
+                            <small className="label pull-right bg-red">3</small>
+                            <small className="label pull-right bg-blue">17</small>
+                            </span>
+                        </Link>
+                        </li>
+                        <li>
+                        <Link to="#">
+                            <i className="fa fa-envelope"></i> <span>Mailbox</span>
+                            <span className="pull-right-container">
+                            <small className="label pull-right bg-yellow">12</small>
+                            <small className="label pull-right bg-green">16</small>
+                            <small className="label pull-right bg-red">5</small>
+                            </span>
+                        </Link>
+=======
                         <li className="treeview">
                             <Link to="#">
                                 <i className="fa fa-user"></i> <span>Users</span>
@@ -55,6 +106,7 @@ class SideBar extends Component {
                                 <i className="fa fa-qrcode"></i> <span>QR Codes</span>
                             </Link>                
                                    
+>>>>>>> e43728678074597af48a5c5818ae41203bfea30f
                         </li>
                     </ul>
                 </section>
