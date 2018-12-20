@@ -8,7 +8,6 @@ import { url } from '../config'
 export const registerUser = (userData, history) => dispatch =>  {
     axios.post(`${url.mtechAuth}/register`, userData)
     .then(res =>{
-        console.log('res', res)
          history.push('/admin/login')
     })
     .catch(err => console.log('err', err))
@@ -46,6 +45,7 @@ export const setCurrentUser = (decoded) => {
 // Log user out 
 export const logoutUser = () => dispatch => {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('redux-store');
     setAuthToken(false);
     dispatch(setCurrentUser({}))
 }

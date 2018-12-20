@@ -1,7 +1,4 @@
-# React Redux Core UI Admin Panel
-
-This project was generated with [React Script](https://www.npmjs.com/package/react-scripts).
-
+# React Redux Phoenix Admin Panel
 ## Installation
 
 Clone the repository

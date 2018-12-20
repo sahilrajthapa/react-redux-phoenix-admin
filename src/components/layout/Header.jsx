@@ -5,7 +5,7 @@ class Header extends Component {
     render(){
         return (
             <header className="main-header">
-                <Link to="/" className="logo">
+                <Link to="/admin" className="logo">
                     <span className="logo-mini"><b>P</b>AP</span>
                     <span className="logo-lg"><b>Phoenix</b>AP</span>
                 </Link>
